@@ -1,10 +1,14 @@
 import React from 'react';
+import Layout from './hoc/Layout';
+
 
 function App() {
   return (
-    <div className="App">
+    <div>
+      <Layout/>
     </div>
-  );
+);
+
 }
 
 export default App;
