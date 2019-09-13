@@ -4,21 +4,21 @@ import HeaderImage from '../assets/header.jpg';
 import NavBar from '../components/Navigation/NavBar';
 
 const StyledHeader = styled.header`
-    height: 30rem;
-    background-color: #ffff;
+    height: 46rem;
+    background-color: var(--color-tertiary);
     background-size: cover;
     background-position: top;
+    border-bottom: 4px solid var(--color-primary);
     display: grid;
     justify-content: center;
     grid-template-rows: 4rem repeat(7, 1fr);
     grid-template-columns: repeat(15, 1fr);
 `;
 
-
 const Quote = styled.div`
     grid-column: 5 / 10;
-    grid-row: 4 / 7;
-    font-size: 1.5rem;
+    grid-row: 5/ 7;
+    font-size: 2.5rem;
 `;
 
 const QuoteText = styled.div`
@@ -32,13 +32,13 @@ const QuoteAuthor = styled.div`
 
 const Text = styled.div`
     grid-column: 3 / 4;
-    grid-row: 3 / 7;
+    grid-row: 4 / 8;
 
     display: grid;
 `;
 
 const TextItem = styled.div`
-    font-size: 2.3rem;
+    font-size: 3rem;
     font-weight: 700;
 `;
 
@@ -48,20 +48,20 @@ const Image = styled.div`
     background-image: url(${HeaderImage});
     background-size: cover;
     z-index: 100;
-    border: 4px solid  #FED403;
+    border: 4px solid var(--color-primary);
 `;
 
 const Rectangle = styled.div`
     grid-column: 12 / 16;
     grid-row: 1 / -1;
 
-    background-color: #FED403;
+    background-color: var(--color-primary);
     z-index: 20;
 `;
 
 const Header = () => (
     <StyledHeader>
-            <NavBar backgroundColor="transparent"/>
+            <NavBar backgroundColor="transparent" navPosition="static"/>
             <Text>
                 <TextItem>Plan</TextItem>
                 <TextItem>Shop</TextItem>
