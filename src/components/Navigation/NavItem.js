@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledItem = styled.li`
     box-sizing: border-box;
     display: block;
-    padding: 0 2rem;;
+    padding: 0 2rem;
 `;
 
 const Link = styled.a`
@@ -17,7 +18,7 @@ const Link = styled.a`
     display: block;
 
     :hover {
-        color: var(--color-secondary-dark);
+        color: var(--color-text);
     }
 `;
 
@@ -26,5 +27,9 @@ const NavItem = (props) => (
         <Link href="#">{props.children}</Link>
     </StyledItem>
 );
+
+NavItem.propTypes = {
+    children: PropTypes.element.isRequired
+};
 
 export default NavItem;

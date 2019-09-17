@@ -3,8 +3,8 @@
 :root {
   --color-primary: #FED403;
   --color-primary-dark: #f5ab0c;
-  --color-secondary: rgba(232, 0, 0, 0.541);
-  --color-secondary-dark: rgb(232, 0, 0);
+  --color-primary-light: #f7dc59;
+  --color-secondary: #22220e;
   --color-tertiary: #ffff;
 
   --color-text: #595A55;

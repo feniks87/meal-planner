@@ -4,6 +4,7 @@ import HeaderImage from '../assets/header.jpg';
 import NavBar from '../components/Navigation/NavBar';
 
 const StyledHeader = styled.header`
+    grid-column: 1 / -1;
     height: 46rem;
     background-color: var(--color-tertiary);
     background-size: cover;
@@ -44,7 +45,7 @@ const TextItem = styled.div`
 
 const Image = styled.div`
     grid-column: 11 / -2;
-    grid-row: 2 / 8;
+    grid-row: 3 / 8;
     background-image: url(${HeaderImage});
     background-size: cover;
     z-index: 100;
@@ -61,18 +62,18 @@ const Rectangle = styled.div`
 
 const Header = () => (
     <StyledHeader>
-            <NavBar backgroundColor="transparent" navPosition="static"/>
-            <Text>
-                <TextItem>Plan</TextItem>
-                <TextItem>Shop</TextItem>
-                <TextItem>Cook</TextItem>
-            </Text>
-            <Quote>
-                <QuoteText>People want honest, flavourful food, not some show-off meal that takes days to prepare.</QuoteText>
-                <QuoteAuthor>Ted Allen</QuoteAuthor>
-            </Quote>
-            <Image />
-            <Rectangle />
+        <NavBar />
+        <Text>
+            <TextItem>Plan</TextItem>
+            <TextItem>Shop</TextItem>
+            <TextItem>Cook</TextItem>
+        </Text>
+        <Quote>
+            <QuoteText>People want honest, flavourful food, not some show-off meal that takes days to prepare.</QuoteText>
+            <QuoteAuthor>Ted Allen</QuoteAuthor>
+        </Quote>
+        <Image />
+        <Rectangle />
     </StyledHeader>
 )
 
