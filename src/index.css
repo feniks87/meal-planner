@@ -7,7 +7,7 @@
   --color-secondary: #22220e;
   --color-tertiary: #ffff;
 
-  --color-text: #595A55;
+  --color-grey: #595A55;
 }
 
 html {
@@ -19,7 +19,7 @@ html {
 body {
   margin: 0;
   font-family: 'Titillium Web', sans-serif;
-  color: var(--color-text);
+  color: var(--color-grey);
 }
 
 code {

@@ -18,7 +18,7 @@ const Link = styled.a`
     display: block;
 
     :hover {
-        color: var(--color-text);
+        color: var(--color-grey);
     }
 `;
 

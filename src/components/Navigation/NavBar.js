@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import NavItems from './NavItems';
-import Logo from '../../assets/logo.png';
+import Logo from '../Logo';
+import LogoImg from '../../assets/logo.png';
 
 const StyledNav = styled.nav`
     grid-column: 1 / -1;
@@ -17,13 +18,9 @@ const StyledNav = styled.nav`
     padding: 1.5rem;
 `;
 
-const StyledLogo = styled.img`
-    width: 4rem;
-`;
-
 const NavBar = () => (
     <StyledNav>
-        <StyledLogo src={Logo} />
+        <Logo src={LogoImg}/>
         <NavItems />
     </StyledNav>
 );

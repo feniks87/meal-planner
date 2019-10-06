@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import CreateRecipe from '../components/Recipes/CreateRecipe';
 import NavBar from '../components/Navigation/NavBar';
 
@@ -15,13 +16,6 @@ const Wrapper = styled.div`
 const Content = styled.main`
     grid-row: 2;
     grid-column: 1 / -1;
-`;
-
-const Footer = styled.main`
-    grid-row: 3;
-    grid-column: 1 / -1;
-    height: 5rem;
-    background-color: darkgray;
 `;
 
 const Layout = () => (
