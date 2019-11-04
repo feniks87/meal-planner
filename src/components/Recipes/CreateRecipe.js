@@ -3,22 +3,22 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
     display: grid;
-    grid-template-rows: repeat(10, 1fr);
+    grid-template-rows: 10rem 1fr 7rem;
     grid-template-columns: repeat(10, 1fr);
 `;
 
 const Heading = styled.h2`
     grid-column: 4 / 6;
-    grid-row: 1 / 3;
+    grid-row: 1 / 2;
     justify-self: center;
     align-self: center;
-    color: var(--color-text);
+    color: var(--color-grey);
     z-index: 100;
 `;
 
 const StyledForm = styled.form`
     grid-column: 3 / -4;
-    grid-row: 3 / 10;
+    grid-row: 2;
     box-shadow: 0 3px 10px #ccc;
     border: 1px solid #eee;
     padding: 1rem;
@@ -29,7 +29,7 @@ const StyledForm = styled.form`
 
 const Rectangle = styled.div`
     grid-column: 4 / 9;
-    grid-row: 1 / 11;
+    grid-row: 1 / -1;
     background-color: var(--color-primary);
     z-index: 20;
 
@@ -73,7 +73,7 @@ const Button = styled.button`
     background-color: var(--color-primary-light);
     border: none;
     display: block;
-    color: var(--color-text);
+    color: var(--color-grey);
     outline: none;
     cursor: pointer;
     padding: 1.5rem;
@@ -83,18 +83,19 @@ const Button = styled.button`
     text-transform: uppercase;
 `;
 
-const CreateRecipe = () => (
+const CreateRecipe = (props) => {
+    return (
     <Wrapper>
         <Heading>Create recipe</Heading>
-        <StyledForm>
-            <Input placeholder="Recipe name"/>
-            <TextArea placeholder="Ingredients"/>
-            <TextArea placeholder="Cooking directions"/>
-            <Button>Add recipe</Button>
+        <StyledForm onSubmit={props.submitHandler}>
+            <Input name={props.recipeName} value={props.inputName} onChange={props.inputHandler} placeholder="Recipe name"/>
+            <TextArea name={props.ingName} value={props.inputIngs} onChange={props.inputHandler} placeholder="Ingredients"/>
+            <TextArea name={props.directionsName} value={props.inputDirections} onChange={props.inputHandler} placeholder="Cooking directions"/>
+            <Button type="submit">Add recipe</Button>
         </StyledForm>
         <Rectangle />
     </Wrapper>
-
-);
+    )
+}
 
 export default CreateRecipe;
