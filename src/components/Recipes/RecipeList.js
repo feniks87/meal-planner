@@ -13,9 +13,9 @@ const Wrapper = styled.div`
 const Heading = styled.h2`
     grid-column: 4 / 6;
     grid-row: 1 / 2;
-    justify-self: center;
     align-self: center;
     color: var(--color-grey);
+    margin-left: 8rem;
     z-index: 100;
 `;
 

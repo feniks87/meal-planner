@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 const Heading = styled.h2`
     grid-column: 4 / 6;
     grid-row: 1 / 2;
-    justify-self: center;
+    margin-left: 8rem;
     align-self: center;
     color: var(--color-grey);
     z-index: 100;
@@ -32,7 +32,6 @@ const Rectangle = styled.div`
     grid-row: 1 / -1;
     background-color: var(--color-primary);
     z-index: 20;
-
 `;
 
 const Input = styled.input`
@@ -44,10 +43,16 @@ const Input = styled.input`
     display: block;
     width: 90%;
     box-sizing: border-box;
+    transition: 0.2s;
 
     ::placeholder {
         color: #bbb;
         font-family: inherit;
+    }
+
+    :focus {
+        border: 1px solid var(--color-primary-light);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 3px rgba(247, 220, 89, .6);
     }
 `;
 
@@ -66,6 +71,10 @@ const TextArea = styled.textarea`
     ::placeholder {
         color: #bbb;
         font-family: inherit;
+    }
+    :focus {
+        border: 1px solid var(--color-primary-light);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 3px rgba(247, 220, 89, .6);
     }
 `;
 

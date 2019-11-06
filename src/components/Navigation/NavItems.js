@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import NavItem from './NavItem';
 
+
 const StyledItems = styled.ul`
     display: flex;
     margin: 0 auto;
@@ -10,9 +11,9 @@ const StyledItems = styled.ul`
 
 const NavItems = () => (
     <StyledItems>
-        <NavItem>My menu</NavItem>
-        <NavItem>My recipes</NavItem>
-        <NavItem>Create recipe</NavItem>
+        <NavItem link="/menu">My menu</NavItem>
+        <NavItem link="/recipe-list">My recipes</NavItem>
+        <NavItem link="/create-recipe">Create recipe</NavItem>
     </StyledItems>
 );
 
