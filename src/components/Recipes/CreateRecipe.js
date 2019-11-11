@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { addRecipe } from '../../actions/recipeActions';
+import uuid from 'uuid';
 
 const Wrapper = styled.div`
     display: grid;
@@ -92,18 +95,48 @@ const Button = styled.button`
     text-transform: uppercase;
 `;
 
+const initialRecipe = {
+    id: '',
+    name: '',
+    ings: '',
+    directions: ''
+}
+
 const CreateRecipe = (props) => {
+    const [recipe, setRecipeItem] = useState(initialRecipe);
+    const dispatch = useDispatch();
+
+    const inputHandler = (event) => {
+        let name = event.target.name;
+        let value = event.target.value;
+        setRecipeItem(prevState => {
+            return {
+                ...prevState,
+                [name]: value
+        }});
+    }
+
+    const submitHandler = (event) => {
+        event.preventDefault();
+        if (recipe && recipe.name && recipe.ings && recipe.directions) {
+            dispatch(addRecipe(
+                {id: uuid(), name: recipe.name, ings: recipe.ings, directions: recipe.directions}
+            ))
+        };
+        setRecipeItem(initialRecipe);
+    };
+
     return (
-    <Wrapper>
-        <Heading>Create recipe</Heading>
-        <StyledForm onSubmit={props.submitHandler}>
-            <Input name={props.recipeName} value={props.inputName} onChange={props.inputHandler} placeholder="Recipe name"/>
-            <TextArea name={props.ingName} value={props.inputIngs} onChange={props.inputHandler} placeholder="Ingredients"/>
-            <TextArea name={props.directionsName} value={props.inputDirections} onChange={props.inputHandler} placeholder="Cooking directions"/>
-            <Button type="submit">Add recipe</Button>
-        </StyledForm>
-        <Rectangle />
-    </Wrapper>
+        <Wrapper>
+            <Heading>Create recipe</Heading>
+            <StyledForm onSubmit={submitHandler}>
+                <Input name='name' value={recipe.name} onChange={inputHandler} placeholder="Recipe name"/>
+                <TextArea name='ings' value={recipe.ings} onChange={inputHandler} placeholder="Ingredients"/>
+                <TextArea name='directions' value={recipe.directions} onChange={inputHandler} placeholder="Cooking directions"/>
+                <Button type="submit">Add recipe</Button>
+            </StyledForm>
+            <Rectangle />
+        </Wrapper>
     )
 }
 

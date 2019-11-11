@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import CreateRecipe from './CreateRecipe';
 import RecipeItem from './RecipeItem';
-import uuid from 'uuid';
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
     display: grid;
@@ -37,62 +36,8 @@ const Rectangle = styled.div`
     z-index: 20;
 `;
 
-const initialRecipeList = [
-    {
-        id: uuid(),
-        name: 'Pork schnitzel & apple parmesan salad',
-        ings: 'potato, parsley, apple, parmesan cheese, panko breadcrumbs, pork schnitzel, mixed salad leaves, smokey aioli',
-        directions: '1. Bake the fries 2. Prepare the crumb 3. Crumb the pork 4. Cook the pork 5. Make salad'
-    },
-    {
-        id: uuid(),
-        name: 'Pork schnitzel & apple parmesan salad',
-        ings: 'potato, parsley, apple, parmesan cheese, panko breadcrumbs, pork schnitzel, mixed salad leaves, smokey aioli',
-        directions: '1. Bake the fries 2. Prepare the crumb 3. Crumb the pork 4. Cook the pork 5. Make salad'
-    },
-    {
-        id: uuid(),
-        name: 'Pork schnitzel & apple parmesan salad',
-        ings: 'potato, parsley, apple, parmesan cheese, panko breadcrumbs, pork schnitzel, mixed salad leaves, smokey aioli',
-        directions: '1. Bake the fries 2. Prepare the crumb 3. Crumb the pork 4. Cook the pork 5. Make salad'
-    },
-    {
-        id: uuid(),
-        name: 'Pork schnitzel & apple parmesan salad',
-        ings: 'potato, parsley, apple, parmesan cheese, panko breadcrumbs, pork schnitzel, mixed salad leaves, smokey aioli',
-        directions: '1. Bake the fries 2. Prepare the crumb 3. Crumb the pork 4. Cook the pork 5. Make salad'
-    }
-];
-
-const initialRecipe = {
-    id: '',
-    name: '',
-    ings: '',
-    directions: ''
-}
-
 const RecipeList = () => {
-    const [recipes, setRecipeList] = useState(initialRecipeList);
-    const [recipe, setRecipeItem] = useState(initialRecipe);
-
-    const inputHandler = (event) => {
-        let name = event.target.name;
-        let value = event.target.value;
-        setRecipeItem(prevState => {
-            return {
-                ...prevState,
-                [name]: value
-        }});
-    }
-
-    const submitHandler = (event) => {
-        event.preventDefault();
-        if (recipe) {
-            setRecipeList(prevList =>
-            [...prevList, {id: uuid(), name: recipe.name, ings: recipe.ings, directions: recipe.directions}]
-        )};
-        setRecipeItem(initialRecipe);
-    };
+    const recipes = useSelector(state => state);
 
     return (
         <div>
@@ -108,19 +53,9 @@ const RecipeList = () => {
                 </StyledList>
                 <Rectangle />
             </Wrapper>
-
-            <CreateRecipe
-                submitHandler={submitHandler}
-                recipeName='name'
-                ingName='ings'
-                directionsName='directions'
-                inputName={recipe.name}
-                inputIngs={recipe.ings}
-                inputDirections={recipe.directions}
-                inputHandler={inputHandler}
-                />
         </div>
     );
 }
+
 
 export default RecipeList;
