@@ -10,7 +10,7 @@ const recipes = [
     }
 ];
 
-function recipeReducer(state = recipes, action) {
+export function recipeReducer(state = recipes, action) {
     switch(action.type) {
         case ADD_RECIPE:
             return [
@@ -25,6 +25,4 @@ function recipeReducer(state = recipes, action) {
         default:
             return state;
     }
-}
-
-export default recipeReducer;
+};

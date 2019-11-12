@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import RecipeItem from './RecipeItem';
 import { useSelector } from "react-redux";
@@ -7,6 +7,7 @@ const Wrapper = styled.div`
     display: grid;
     grid-template-rows: 10rem 1fr 7rem;
     grid-template-columns: repeat(10, 1fr);
+    margin: 10rem 0;
 `;
 
 const Heading = styled.h2`
@@ -37,8 +38,7 @@ const Rectangle = styled.div`
 `;
 
 const RecipeList = () => {
-    const recipes = useSelector(state => state);
-
+    const recipes = useSelector(state => state.recipeReducer);
     return (
         <div>
             <Wrapper>

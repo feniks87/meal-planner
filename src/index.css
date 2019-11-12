@@ -8,6 +8,9 @@
   --color-tertiary: #ffff;
 
   --color-grey: #595A55;
+
+  --color-success: #c4e0b1;
+  --color-error: #f2baba;
 }
 
 html {

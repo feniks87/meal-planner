@@ -1,18 +1,33 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addRecipe } from '../../actions/recipeActions';
+import { successMessage, errorMessage } from '../../actions/alertActions';
 import uuid from 'uuid';
 
 const Wrapper = styled.div`
     display: grid;
-    grid-template-rows: 10rem 1fr 7rem;
+    grid-template-rows: min-content 10rem 1fr 7rem;
     grid-template-columns: repeat(10, 1fr);
+    margin: 10rem 0;
+`;
+
+const StyledAlertMessage = styled.div`
+    background-color: ${props => props.success ? "var(--color-success)" : "var(--color-error)"};
+    grid-row: 1;
+    grid-column: 3 / -3;
+    margin-bottom: 3rem;
+    padding: 1.2rem;
+    font-size: 1.7rem;
+    justify-items: center;
+    font-family: inherit;
+    border-radius: 1px;
+    text-align: center;
 `;
 
 const Heading = styled.h2`
     grid-column: 4 / 6;
-    grid-row: 1 / 2;
+    grid-row: 2 / 3;
     margin-left: 8rem;
     align-self: center;
     color: var(--color-grey);
@@ -21,7 +36,7 @@ const Heading = styled.h2`
 
 const StyledForm = styled.form`
     grid-column: 3 / -4;
-    grid-row: 2;
+    grid-row: 3;
     box-shadow: 0 3px 10px #ccc;
     border: 1px solid #eee;
     padding: 1rem;
@@ -32,7 +47,7 @@ const StyledForm = styled.form`
 
 const Rectangle = styled.div`
     grid-column: 4 / 9;
-    grid-row: 1 / -1;
+    grid-row: 2 / -1;
     background-color: var(--color-primary);
     z-index: 20;
 `;
@@ -102,9 +117,10 @@ const initialRecipe = {
     directions: ''
 }
 
-const CreateRecipe = (props) => {
+const CreateRecipe = () => {
     const [recipe, setRecipeItem] = useState(initialRecipe);
     const dispatch = useDispatch();
+    const alert = useSelector(state => state.alertReducer);
 
     const inputHandler = (event) => {
         let name = event.target.name;
@@ -119,17 +135,23 @@ const CreateRecipe = (props) => {
     const submitHandler = (event) => {
         event.preventDefault();
         if (recipe && recipe.name && recipe.ings && recipe.directions) {
-            dispatch(addRecipe(
-                {id: uuid(), name: recipe.name, ings: recipe.ings, directions: recipe.directions}
-            ))
+            dispatch(addRecipe({id: uuid(), name: recipe.name, ings: recipe.ings, directions: recipe.directions}));
+            dispatch(successMessage('New recipe has been successfully added to My recipes'));
+        } else {
+            dispatch(errorMessage('Please fill all the fields'));
         };
         setRecipeItem(initialRecipe);
     };
 
     return (
         <Wrapper>
+            {alert.message && (alert.type === "success" ?
+                <StyledAlertMessage success>{alert.message}</StyledAlertMessage> : <StyledAlertMessage>{alert.message}</StyledAlertMessage>)
+            }
             <Heading>Create recipe</Heading>
+
             <StyledForm onSubmit={submitHandler}>
+
                 <Input name='name' value={recipe.name} onChange={inputHandler} placeholder="Recipe name"/>
                 <TextArea name='ings' value={recipe.ings} onChange={inputHandler} placeholder="Ingredients"/>
                 <TextArea name='directions' value={recipe.directions} onChange={inputHandler} placeholder="Cooking directions"/>

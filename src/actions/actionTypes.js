@@ -1,1 +1,5 @@
 export const ADD_RECIPE = 'ADD_RECIPE';
+
+export const SUCCESS_MESSAGE = 'SUCCESS_MESSAGE';
+export const ERROR_MESSAGE = 'ERROR_MESSAGE';
+export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
