@@ -1,4 +1,5 @@
-export const ADD_RECIPE = 'ADD_RECIPE';
+export const ADD_RECIPE_SUCCESS = 'ADD_RECIPE_SUCCESS';
+export const ADD_RECIPE_FAIL = 'ADD_RECIPE_FAIL';
 
 export const SUCCESS_MESSAGE = 'SUCCESS_MESSAGE';
 export const ERROR_MESSAGE = 'ERROR_MESSAGE';

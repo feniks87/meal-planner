@@ -1,4 +1,4 @@
-import { ADD_RECIPE } from '../actions/actionTypes';
+import { ADD_RECIPE_SUCCESS } from '../actions/actionTypes';
 import uuid from 'uuid';
 
 const recipes = [
@@ -12,7 +12,7 @@ const recipes = [
 
 export function recipeReducer(state = recipes, action) {
     switch(action.type) {
-        case ADD_RECIPE:
+        case ADD_RECIPE_SUCCESS:
             return [
                 ...state,
                 {

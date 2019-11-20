@@ -136,9 +136,7 @@ const CreateRecipe = () => {
         event.preventDefault();
         if (recipe && recipe.name && recipe.ings && recipe.directions) {
             dispatch(addRecipe({id: uuid(), name: recipe.name, ings: recipe.ings, directions: recipe.directions}));
-            dispatch(successMessage('New recipe has been successfully added to My recipes'));
-        } else {
-            dispatch(errorMessage('Please fill all the fields'));
+            
         };
         setRecipeItem(initialRecipe);
     };
