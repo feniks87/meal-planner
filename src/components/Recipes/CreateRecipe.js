@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { addRecipe } from '../../actions/recipeActions';
-import { successMessage, errorMessage } from '../../actions/alertActions';
+import { errorMessage } from '../../actions/alertActions';
 import uuid from 'uuid';
 
 const Wrapper = styled.div`
@@ -136,8 +136,9 @@ const CreateRecipe = () => {
         event.preventDefault();
         if (recipe && recipe.name && recipe.ings && recipe.directions) {
             dispatch(addRecipe({id: uuid(), name: recipe.name, ings: recipe.ings, directions: recipe.directions}));
-            
-        };
+        } else {
+            dispatch(errorMessage("Please fill all the fields"));
+        }
         setRecipeItem(initialRecipe);
     };
 

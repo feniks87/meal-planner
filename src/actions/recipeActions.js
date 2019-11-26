@@ -23,3 +23,31 @@ export const addRecipe = (recipe) => {
             })
     }
 }
+
+export const fetchRecipesSuccess = (recipes) => {
+    return { type: FETCH_RECIPE_SUCCESS, recipes }
+};
+
+export const fetchRecipesFail = (error) => {
+    return { type: FETCH_RECIPE_FAIL, error }
+};
+
+export const fetchRecipes = () => {
+    return dispatch => {
+        axios.get('/recipes.json')
+            .then(recipes => {
+                const fetchedRecipes = [];
+                for (let key in recipes.data) {
+                    fetchedRecipes.push({
+                        ...recipes.data[key],
+                        id: key
+                    });
+                }
+                dispatch(fetchRecipesSuccess(fetchedRecipes));
+            })
+            .catch(error => {
+                dispatch(fetchRecipesFail(error.toString()));
+            });
+    };
+}
+

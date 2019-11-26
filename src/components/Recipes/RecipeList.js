@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import RecipeItem from './RecipeItem';
-import { useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import {fetchRecipes} from '../../actions/recipeActions';
 
 const Wrapper = styled.div`
     display: grid;
@@ -38,7 +40,12 @@ const Rectangle = styled.div`
 `;
 
 const RecipeList = () => {
-    const recipes = useSelector(state => state.recipeReducer);
+    const recipes = useSelector(state => state.recipeReducer.recipes);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchRecipes());
+    }, [dispatch]);
+
     return (
         <div>
             <Wrapper>
