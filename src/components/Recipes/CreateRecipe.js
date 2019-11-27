@@ -96,6 +96,38 @@ const TextArea = styled.textarea`
     }
 `;
 
+const ImageUploadingBox = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin: 0 3.5rem;
+`;
+
+const SelectImage = styled.input`
+    display: none;
+`;
+
+const UploadedImage = styled.img`
+    width: 7rem;
+    height: 7rem;
+`;
+
+const SelectImageButton = styled.label`
+    background-color: var(--color-primary-light);
+    border: none;
+    display: inline-block;
+    color: var(--color-grey);
+    outline: none;
+    cursor: pointer;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    align-self: center;
+
+    :hover {
+        background-color: var(--color-primary);
+    }
+`;
+
 const Button = styled.button`
     background-color: var(--color-primary-light);
     border: none;
@@ -108,6 +140,11 @@ const Button = styled.button`
     font-size: 1.5rem;
     font-weight: 500;
     text-transform: uppercase;
+
+    :hover {
+        background-color: var(--color-primary);
+        font-weight: 600;
+    }
 `;
 
 const initialRecipe = {
@@ -150,10 +187,17 @@ const CreateRecipe = () => {
             <Heading>Create recipe</Heading>
 
             <StyledForm onSubmit={submitHandler}>
-
                 <Input name='name' value={recipe.name} onChange={inputHandler} placeholder="Recipe name"/>
                 <TextArea name='ings' value={recipe.ings} onChange={inputHandler} placeholder="Ingredients"/>
                 <TextArea name='directions' value={recipe.directions} onChange={inputHandler} placeholder="Cooking directions"/>
+                <ImageUploadingBox>
+                    <SelectImageButton>
+                        <SelectImage type="file"/>Upload image
+                    </SelectImageButton>
+                    <UploadedImage src="https://react.semantic-ui.com/images/wireframe/image.png"/>
+                </ImageUploadingBox>
+
+
                 <Button type="submit">Add recipe</Button>
             </StyledForm>
             <Rectangle />
