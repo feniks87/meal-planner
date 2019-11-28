@@ -39,7 +39,7 @@ const StyledRecipeDirections = styled.div`
 
 const RecipeItem = (props) => (
     <StyledRecipe>
-        <StyledImage src="https://react.semantic-ui.com/images/wireframe/image.png" />
+        <StyledImage src={props.imageURL || 'https://react.semantic-ui.com/images/wireframe/image.png'} />
         <StyledRecipeName>{props.name}</StyledRecipeName>
         <StyledRecipeIngs>{props.ings}</StyledRecipeIngs>
         <StyledRecipeDirections>{props.directions}</StyledRecipeDirections>

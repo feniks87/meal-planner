@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addRecipe } from '../../actions/recipeActions';
 import { errorMessage } from '../../actions/alertActions';
 import uuid from 'uuid';
+import { storage } from '../../config/config';
 
 const Wrapper = styled.div`
     display: grid;
@@ -102,7 +103,7 @@ const ImageUploadingBox = styled.div`
     margin: 0 3.5rem;
 `;
 
-const SelectImage = styled.input`
+const SelectImageInput = styled.input`
     display: none;
 `;
 
@@ -128,6 +129,12 @@ const SelectImageButton = styled.label`
     }
 `;
 
+const Progress = styled.progress`
+    align-self: center;
+    width: 30rem;
+    height: 2.5rem;
+`;
+
 const Button = styled.button`
     background-color: var(--color-primary-light);
     border: none;
@@ -151,15 +158,17 @@ const initialRecipe = {
     id: '',
     name: '',
     ings: '',
-    directions: ''
+    directions: '',
+    imageURL: ''
 }
 
 const CreateRecipe = () => {
     const [recipe, setRecipeItem] = useState(initialRecipe);
+    const [progress, setProgress] = useState(0);
     const dispatch = useDispatch();
     const alert = useSelector(state => state.alertReducer);
 
-    const inputHandler = (event) => {
+    const inputHandler = event => {
         let name = event.target.name;
         let value = event.target.value;
         setRecipeItem(prevState => {
@@ -167,12 +176,46 @@ const CreateRecipe = () => {
                 ...prevState,
                 [name]: value
         }});
+    };
+
+    const changeImageHandler = event => {
+
+        if (event.target.files[0]) {
+            const image = event.target.files[0];
+
+            uploadHandler(image)
+        }
     }
 
-    const submitHandler = (event) => {
+    const uploadHandler = (image) => {
+        const uploadTask = storage.ref(`images/${image.name}`).put(image);
+        uploadTask.on('state_changed',
+        (snapshot) => {
+            // progrss function ....
+            const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+            setProgress(progress);
+        },
+        (error) => {
+            // error function ....
+            console.log(error);
+        },
+        () => {
+            console.log('finished...')
+            // complete function ....
+            storage.ref('images').child(image.name).getDownloadURL().then(url => {
+                setRecipeItem(prevState => {
+                    return {
+                        ...prevState,
+                        imageURL: url
+                }});
+            })
+        });
+    }
+
+    const submitHandler = event => {
         event.preventDefault();
         if (recipe && recipe.name && recipe.ings && recipe.directions) {
-            dispatch(addRecipe({id: uuid(), name: recipe.name, ings: recipe.ings, directions: recipe.directions}));
+            dispatch(addRecipe({id: uuid(), ...recipe}));
         } else {
             dispatch(errorMessage("Please fill all the fields"));
         }
@@ -192,9 +235,11 @@ const CreateRecipe = () => {
                 <TextArea name='directions' value={recipe.directions} onChange={inputHandler} placeholder="Cooking directions"/>
                 <ImageUploadingBox>
                     <SelectImageButton>
-                        <SelectImage type="file"/>Upload image
+                         <SelectImageInput type="file" onChange={changeImageHandler}/>Upload image
                     </SelectImageButton>
-                    <UploadedImage src="https://react.semantic-ui.com/images/wireframe/image.png"/>
+
+                    <Progress value={progress} max="100"/>
+                    <UploadedImage src={recipe.imageURL || 'https://react.semantic-ui.com/images/wireframe/image.png'}/>
                 </ImageUploadingBox>
 
 

@@ -53,6 +53,7 @@ const RecipeList = () => {
                 <StyledList>
                     {recipes.map(item =>
                         <RecipeItem
+                            imageURL={item.imageURL}
                             name={item.name}
                             ings={item.ings}
                             directions={item.directions}/>
