@@ -130,9 +130,22 @@ const SelectImageButton = styled.label`
 `;
 
 const Progress = styled.progress`
-    align-self: center;
+    display: block;
     width: 30rem;
-    height: 2.5rem;
+    margin: auto;
+    background: white;
+
+    ::-moz-progress-bar {
+        background: var(--color-primary-light);
+
+    }
+
+    ::-webkit-progress-bar {
+        background: transparent;
+    }
+    ::-webkit-progress-value {
+        background: var(--color-primary-light);
+    }
 `;
 
 const Button = styled.button`
@@ -179,7 +192,6 @@ const CreateRecipe = () => {
     };
 
     const changeImageHandler = event => {
-
         if (event.target.files[0]) {
             const image = event.target.files[0];
 
@@ -232,17 +244,14 @@ const CreateRecipe = () => {
             <StyledForm onSubmit={submitHandler}>
                 <Input name='name' value={recipe.name} onChange={inputHandler} placeholder="Recipe name"/>
                 <TextArea name='ings' value={recipe.ings} onChange={inputHandler} placeholder="Ingredients"/>
-                <TextArea name='directions' value={recipe.directions} onChange={inputHandler} placeholder="Cooking directions"/>
+                <TextArea name='directions' value={recipe.directions} onChange={inputHandler} placeholder="Cooking instructions"/>
                 <ImageUploadingBox>
+                    <UploadedImage src={recipe.imageURL || 'https://react.semantic-ui.com/images/wireframe/image.png'} />
+                    <Progress value={progress} max="100"/>
                     <SelectImageButton>
                          <SelectImageInput type="file" onChange={changeImageHandler}/>Upload image
                     </SelectImageButton>
-
-                    <Progress value={progress} max="100"/>
-                    <UploadedImage src={recipe.imageURL || 'https://react.semantic-ui.com/images/wireframe/image.png'}/>
                 </ImageUploadingBox>
-
-
                 <Button type="submit">Add recipe</Button>
             </StyledForm>
             <Rectangle />
