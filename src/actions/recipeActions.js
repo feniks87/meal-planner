@@ -13,8 +13,9 @@ export const addRecipeFail = (error) => {
 export const addRecipe = (recipe) => {
     return dispatch => {
         axios.post('/recipes.json', recipe)
-            .then(recipe => {
-                dispatch(addRecipeSuccess(recipe.data));
+            .then(response => {
+                recipe = {...recipe, id: response.data.name};
+                dispatch(addRecipeSuccess(recipe));
                 dispatch(successMessage('New recipe has been successfully added to My recipes'));
             })
             .catch(error => {

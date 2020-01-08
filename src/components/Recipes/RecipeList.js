@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import RecipeItem from './RecipeItem';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import {fetchRecipes} from '../../actions/recipeActions';
+import Modal from '../Modal';
 
 const Wrapper = styled.div`
     display: grid;
@@ -32,6 +33,30 @@ const StyledList = styled.div`
     background-color: white;
 `;
 
+const SearchBox = styled.div`
+
+`;
+
+const SearchInput = styled.input`
+    outline: none;
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: 1px solid var(--color-primary-light);
+    color: #91928d;
+    border-radius: 1px;
+
+    ::placeholder {
+        color: #bbb;
+        font-family: inherit;
+    }
+
+    :focus {
+        border: 1px solid var(--color-primary-light);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 3px rgba(247, 220, 89, .6);
+    }
+`;
+
 const Rectangle = styled.div`
     grid-column: 4 / 9;
     grid-row: 1 / -1;
@@ -40,30 +65,54 @@ const Rectangle = styled.div`
 `;
 
 const RecipeList = () => {
+    const [searchName, setSearchName] = useState("");
     const recipes = useSelector(state => state.recipeReducer.recipes);
+    const [selectedRecipe, setSelectedRecipe] = useState({});
+    const [isOpen, setOpenModal] = useState(false);
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(fetchRecipes());
     }, [dispatch]);
 
+    const inputHanler = (event) => {
+        setSearchName(event.target.value);
+    }
+
+    const openModalHandler = (recipe) => {
+        setOpenModal(!isOpen);
+        setSelectedRecipe(recipe);
+    }
+
+    const closeModalHandler = () => {
+        setOpenModal(!isOpen);
+    }
+
+    const filteredRecepies = (recipeList) => recipeList.filter(recipe => !searchName || searchName.length === 0 || recipe.name.toLowerCase().includes(searchName.toLowerCase()))
+
     return (
         <div>
-            <Wrapper>
+            <Wrapper >
                 <Heading>Recipes</Heading>
                 <StyledList>
-                    {recipes.map(item =>
+                    <SearchBox>
+                        <SearchInput type="text" name="name" value={searchName} onChange={inputHanler} placeholder="Search..."/>
+                    </SearchBox>
+                    {filteredRecepies(recipes).map(item =>
                         <RecipeItem
-                            imageURL={item.imageURL}
-                            name={item.name}
-                            ings={item.ings}
-                            directions={item.directions}/>
+                            onClickHandler={openModalHandler}
+                            recipe={item}
+                        />
                     )}
+                    <Modal
+                        show={isOpen ? "show" : ""}
+                        recipe={selectedRecipe}
+                        closeHandler={closeModalHandler}/>
                 </StyledList>
-                <Rectangle />
+                <Rectangle/>
             </Wrapper>
         </div>
     );
-}
-
+};
 
 export default RecipeList;

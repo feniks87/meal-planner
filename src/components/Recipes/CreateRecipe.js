@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { addRecipe } from '../../actions/recipeActions';
 import { errorMessage } from '../../actions/alertActions';
-import uuid from 'uuid';
 import { storage } from '../../config/config';
+import Button from '../Button';
 
 const Wrapper = styled.div`
     display: grid;
@@ -56,6 +56,7 @@ const Rectangle = styled.div`
 const Input = styled.input`
     outline: none;
     border: 1px solid var(--color-primary-light);
+    border-radius: 1px;
     background-color: white;
     padding: 1rem;
     margin: 3rem auto;
@@ -86,6 +87,7 @@ const TextArea = styled.textarea`
     min-height: 10rem;
     box-sizing: border-box;
     margin: 3rem auto;
+    border-radius: 1px;
 
     ::placeholder {
         color: #bbb;
@@ -148,27 +150,7 @@ const Progress = styled.progress`
     }
 `;
 
-const Button = styled.button`
-    background-color: var(--color-primary-light);
-    border: none;
-    display: block;
-    color: var(--color-grey);
-    outline: none;
-    cursor: pointer;
-    padding: 1.5rem;
-    margin: 3rem auto;
-    font-size: 1.5rem;
-    font-weight: 500;
-    text-transform: uppercase;
-
-    :hover {
-        background-color: var(--color-primary);
-        font-weight: 600;
-    }
-`;
-
 const initialRecipe = {
-    id: '',
     name: '',
     ings: '',
     directions: '',
@@ -195,7 +177,7 @@ const CreateRecipe = () => {
         if (event.target.files[0]) {
             const image = event.target.files[0];
 
-            uploadHandler(image)
+            uploadHandler(image);
         }
     }
 
@@ -227,7 +209,7 @@ const CreateRecipe = () => {
     const submitHandler = event => {
         event.preventDefault();
         if (recipe && recipe.name && recipe.ings && recipe.directions) {
-            dispatch(addRecipe({id: uuid(), ...recipe}));
+            dispatch(addRecipe(recipe));
         } else {
             dispatch(errorMessage("Please fill all the fields"));
         }
@@ -242,9 +224,9 @@ const CreateRecipe = () => {
             <Heading>Create recipe</Heading>
 
             <StyledForm onSubmit={submitHandler}>
-                <Input name='name' value={recipe.name} onChange={inputHandler} placeholder="Recipe name"/>
-                <TextArea name='ings' value={recipe.ings} onChange={inputHandler} placeholder="Ingredients"/>
-                <TextArea name='directions' value={recipe.directions} onChange={inputHandler} placeholder="Cooking instructions"/>
+                <Input type="text" name='name' value={recipe.name} onChange={inputHandler} placeholder="Recipe name"/>
+                <TextArea type="text" name='ings' value={recipe.ings} onChange={inputHandler} placeholder="Ingredients"/>
+                <TextArea type="text" name='directions' value={recipe.directions} onChange={inputHandler} placeholder="Cooking instructions"/>
                 <ImageUploadingBox>
                     <UploadedImage src={recipe.imageURL || 'https://react.semantic-ui.com/images/wireframe/image.png'} />
                     <Progress value={progress} max="100"/>

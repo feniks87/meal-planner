@@ -23,6 +23,7 @@ const StyledRecipeName = styled.div`
     margin-top: -.5rem;
     font-size: 2rem;
     font-weight: 700;
+    cursor: pointer;
 `;
 
 const StyledRecipeIngs = styled.div`
@@ -38,10 +39,10 @@ const StyledRecipeDirections = styled.div`
 `;
 
 const RecipeItem = (props) => (
-    <StyledRecipe>
-        <StyledImage src={props.imageURL || 'https://react.semantic-ui.com/images/wireframe/image.png'} />
-        <StyledRecipeName>{props.name}</StyledRecipeName>
-        <StyledRecipeIngs>{props.ings}</StyledRecipeIngs>
+    <StyledRecipe id={props.recipe.id}>
+        <StyledImage src={props.recipe.imageURL || 'https://react.semantic-ui.com/images/wireframe/image.png'} />
+        <StyledRecipeName onClick={() => props.onClickHandler(props.recipe)}>{props.recipe.name}</StyledRecipeName>
+        <StyledRecipeIngs>{props.recipe.ings}</StyledRecipeIngs>
         <StyledRecipeDirections>{props.directions}</StyledRecipeDirections>
     </StyledRecipe>
 )

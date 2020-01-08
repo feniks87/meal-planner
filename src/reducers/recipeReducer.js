@@ -23,11 +23,12 @@ export function recipeReducer(state = {recipes: []}, action) {
                 ...state,
                 recipes: action.recipes
             }
-         case actionTypes.FETCH_RECIPE_FAIL:
+        case actionTypes.FETCH_RECIPE_FAIL:
              return {
                  ...state,
                  error: action.error
              }
+        
         default:
             return state;
     }
