@@ -2,24 +2,24 @@ import * as actionTypes from './actionTypes';
 import axios from '../helpers/axios-instance';
 import { successMessage, errorMessage } from '../actions/alertActions';
 
-export const addRecipeSuccess = (recipe) => {
-    return { type: actionTypes.ADD_RECIPE_SUCCESS, recipe }
+export const createRecipeSuccess = (recipe) => {
+    return { type: actionTypes.CREATE_RECIPE_SUCCESS, recipe }
 };
 
-export const addRecipeFail = (error) => {
-    return { type: actionTypes.ADD_RECIPE_FAIL, error }
+export const createRecipeFail = (error) => {
+    return { type: actionTypes.CREATE_RECIPE_FAIL, error }
 };
 
-export const addRecipe = (recipe) => {
+export const createRecipe = (recipe) => {
     return dispatch => {
         axios.post('/recipes.json', recipe)
             .then(response => {
                 recipe = {...recipe, id: response.data.name};
-                dispatch(addRecipeSuccess(recipe));
+                dispatch(createRecipeSuccess(recipe));
                 dispatch(successMessage('New recipe has been successfully added to My recipes'));
             })
             .catch(error => {
-                dispatch(addRecipeFail(error.message));
+                dispatch(createRecipeFail(error.message));
                 dispatch(errorMessage(error.message))
             })
     }

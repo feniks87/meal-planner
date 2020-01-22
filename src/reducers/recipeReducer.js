@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 export function recipeReducer(state = {recipes: []}, action) {
     switch(action.type) {
-        case actionTypes.ADD_RECIPE_SUCCESS:
+        case actionTypes.CREATE_RECIPE_SUCCESS:
             return {
                 ...state,
                 recipes: [...state.recipes, {
@@ -13,7 +13,7 @@ export function recipeReducer(state = {recipes: []}, action) {
                     imageURL: action.recipe.imageURL
                 }]
             }
-        case actionTypes.ADD_RECIPE_FAIL:
+        case actionTypes.CREATE_RECIPE_FAIL:
             return {
                 ...state,
                 error: action.error
@@ -28,7 +28,7 @@ export function recipeReducer(state = {recipes: []}, action) {
                  ...state,
                  error: action.error
              }
-        
+
         default:
             return state;
     }

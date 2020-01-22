@@ -65,7 +65,6 @@ const Modal = (props) => {
                     </ModalDirections>
                 </ModalContent>
                 <ModalActions>
-                    <Button onClick={props.addRecipeToMenuHandler}>Add to menu</Button>
                     <Button onClick={props.closeHandler}>Close</Button>
                 </ModalActions>
             </StyledModalBox>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { addRecipe } from '../../actions/recipeActions';
+import { createRecipe } from '../../actions/recipeActions';
 import { errorMessage } from '../../actions/alertActions';
 import { storage } from '../../config/config';
 import Button from '../Button';
@@ -136,6 +136,7 @@ const Progress = styled.progress`
     width: 30rem;
     margin: auto;
     background: white;
+    border: 1px solid #e0e1e2;
 
     ::-moz-progress-bar {
         background: var(--color-primary-light);
@@ -209,7 +210,7 @@ const CreateRecipe = () => {
     const submitHandler = event => {
         event.preventDefault();
         if (recipe && recipe.name && recipe.ings && recipe.directions) {
-            dispatch(addRecipe(recipe));
+            dispatch(createRecipe(recipe));
         } else {
             dispatch(errorMessage("Please fill all the fields"));
         }
@@ -234,7 +235,7 @@ const CreateRecipe = () => {
                          <SelectImageInput type="file" onChange={changeImageHandler}/>Upload image
                     </SelectImageButton>
                 </ImageUploadingBox>
-                <Button type="submit">Add recipe</Button>
+                <Button type="submit">Create recipe</Button>
             </StyledForm>
             <Rectangle />
         </Wrapper>
