@@ -27,7 +27,7 @@ const StyledList = styled.div`
     grid-row: 2;
     box-shadow: 0 3px 10px #ccc;
     border: 1px solid #eee;
-    padding: 3rem;
+    padding: 5rem;
     box-sizing: border-box;
     z-index: 100;
     background-color: white;

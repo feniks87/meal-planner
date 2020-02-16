@@ -125,9 +125,11 @@ const SelectImageButton = styled.label`
     font-size: 1.5rem;
     font-weight: 500;
     align-self: center;
+    transition: all 0.2s;
 
     :hover {
         background-color: var(--color-primary);
+        font-weight: 600;
     }
 `;
 

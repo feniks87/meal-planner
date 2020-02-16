@@ -64,9 +64,9 @@ const Header = () => (
     <StyledHeader>
         <NavBar />
         <Text>
-            <TextItem>Plan</TextItem>
-            <TextItem>Shop</TextItem>
-            <TextItem>Cook</TextItem>
+            <TextItem>Plan,</TextItem>
+            <TextItem>Shop,</TextItem>
+            <TextItem>Cook.</TextItem>
         </Text>
         <Quote>
             <QuoteText>People want honest, flavourful food, not some show-off meal that takes days to prepare.</QuoteText>

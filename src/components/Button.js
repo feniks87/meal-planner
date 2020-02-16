@@ -13,6 +13,7 @@ const StyledButton = styled.button`
     font-size: 1.5rem;
     font-weight: 500;
     text-transform: uppercase;
+    transition: all .2s;
 
     :hover {
         background-color: var(--color-primary);
