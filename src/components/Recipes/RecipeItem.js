@@ -5,24 +5,24 @@ const StyledRecipeBox = styled.div`
     display: grid;
     grid-template-columns: 10rem 1fr;
     grid-template-rows: repeat(3, min-content);
-    row-gap: 1rem;
-    column-gap: 2rem;
-    margin-top: 3rem;
-    padding: 1.5rem;
+    row-gap: .5rem;
+    column-gap: .5rem;
+    margin-top: 1.5rem;
+    padding: 1rem;
     box-shadow: 0 0 1rem rgba(0,0,0,.1);
     cursor: pointer;
     transition: all .2s;
 
     :hover {
-        box-shadow: 0 0rem 2rem rgba(0,0,0,.2);
+        box-shadow: 0 0 1rem rgba(0,0,0,.3);
     }
 `;
 
 const StyledImage = styled.img`
     grid-column: 1;
     grid-row: 1 / 4;
-    width: 10rem;
-    height: 10rem;
+    width: 8rem;
+    height: 8rem;
 `;
 
 const StyledRecipeName = styled.div`

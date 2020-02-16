@@ -219,6 +219,7 @@ const CreateRecipe = () => {
         setRecipeItem(initialRecipe);
     };
 
+
     return (
         <Wrapper>
             {alert.message && (alert.type === "success" ?
@@ -237,7 +238,7 @@ const CreateRecipe = () => {
                          <SelectImageInput type="file" onChange={changeImageHandler}/>Upload image
                     </SelectImageButton>
                 </ImageUploadingBox>
-                <Button type="submit">Create recipe</Button>
+                <Button margin="3rem auto" type="submit">Create recipe</Button>
             </StyledForm>
             <Rectangle />
         </Wrapper>

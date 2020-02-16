@@ -33,15 +33,12 @@ const StyledList = styled.div`
     background-color: white;
 `;
 
-const SearchBox = styled.div`
-
-`;
-
-const SearchInput = styled.input`
+const SearchInputBox = styled.input`
     outline: none;
-    padding: 6px;
-    margin-top: 8px;
-    font-size: 17px;
+    padding: .6rem;
+    margin-top: .8rem;
+    margin-bottom: .8rem;
+    font-size: 1.7rem;
     border: 1px solid var(--color-primary-light);
     color: #91928d;
     border-radius: 1px;
@@ -95,9 +92,7 @@ const RecipeList = () => {
             <Wrapper >
                 <Heading>Recipes</Heading>
                 <StyledList>
-                    <SearchBox>
-                        <SearchInput type="text" name="name" value={searchName} onChange={inputHanler} placeholder="Search..."/>
-                    </SearchBox>
+                    <SearchInputBox type="text" name="name" value={searchName} onChange={inputHanler} placeholder="Search..."/>
                     {filteredRecepies(recipes).map(item =>
                         <RecipeItem
                             onClickHandler={openModalHandler}

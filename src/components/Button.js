@@ -9,7 +9,7 @@ const StyledButton = styled.button`
     outline: none;
     cursor: pointer;
     padding: 1.5rem;
-    margin: 3rem auto;
+    margin: ${props => props.center || "3rem 2rem"};
     font-size: 1.5rem;
     font-weight: 500;
     text-transform: uppercase;
@@ -23,7 +23,7 @@ const StyledButton = styled.button`
 
 const Button = (props) => {
     return (
-        <StyledButton type={props.type} onClick={props.onClick}>{props.children}</StyledButton>
+        <StyledButton center={props.margin} type={props.type} onClick={props.onClick}>{props.children}</StyledButton>
     )
 };
 

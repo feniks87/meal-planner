@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from '../Header';
 import MenuItem from './MenuItem';
+import ModalMenu from './ModalMenu';
+import { useState } from 'react';
 
 const Wrapper = styled.div`
     display: grid;
@@ -29,34 +31,66 @@ const Rectangle = styled.div`
     margin: 10rem 0;
 `;
 
-const WeeklyMenu = () => (
-    <Wrapper>
-        <Header />
-        <StyledMenuBox>
-            <MenuItem
-                weekDay="Monday"
-                recipeItem="Teriyaki chicken"/>
-            <MenuItem
-                weekDay="Tuesday"
-                recipeItem="Teriyaki chicken"/>
-            <MenuItem
-                weekDay="Wednesday"
-                recipeItem="Teriyaki chicken"/>
-            <MenuItem
-                weekDay="Thursday"
-                recipeItem="Teriyaki chicken"/>
-            <MenuItem
-                weekDay="Friday"
-                recipeItem="Teriyaki chicken"/>
-            <MenuItem
-                weekDay="Saturday"
-                recipeItem="Teriyaki chicken"/>
-            <MenuItem
-                weekDay="Sunday"
-                recipeItem="Teriyaki chicken"/>
-        </StyledMenuBox>
-        <Rectangle />
-    </Wrapper>
-)
+const WeeklyMenu = () => {
+    const [isOpen, setOpenModal] = useState(false);
+
+
+    const closeModalHandler = () => {
+        setOpenModal(!isOpen);
+
+    };
+
+    const openModalHandler = () => {
+        setOpenModal(!isOpen);
+    };
+
+    const submitRecipeHandler = () => {
+
+    };
+
+    return (
+        <Wrapper>
+            <Header />
+            <StyledMenuBox>
+                <MenuItem
+                    weekDay="Monday"
+                    recipeItem="Teriyaki chicken"
+                    click={openModalHandler} />
+                <MenuItem
+                    weekDay="Tuesday"
+                    recipeItem="Teriyaki chicken"
+                    click={openModalHandler} />
+                <MenuItem
+                    weekDay="Wednesday"
+                    recipeItem="Teriyaki chicken"
+                    click={openModalHandler} />
+                <MenuItem
+                    weekDay="Thursday"
+                    recipeItem="Teriyaki chicken"
+                    click={openModalHandler} />
+                <MenuItem
+                    weekDay="Friday"
+                    recipeItem="Teriyaki chicken"
+                    click={openModalHandler} />
+                <MenuItem
+                    weekDay="Saturday"
+                    recipeItem="Teriyaki chicken"
+                    click={openModalHandler} />
+                <MenuItem
+                    weekDay="Sunday"
+                    recipeItem="Teriyaki chicken"
+                    click={openModalHandler} />
+            </StyledMenuBox>
+            <ModalMenu
+                show={isOpen ? "show" : ""}
+                submitHandler={submitRecipeHandler}
+                closeHandler={closeModalHandler}
+            />
+            <Rectangle />
+        </Wrapper>
+    )
+
+
+}
 
 export default WeeklyMenu;

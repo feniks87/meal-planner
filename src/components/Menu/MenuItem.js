@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ReactComponent as AddButton } from '../../assets/svg/plus.svg';
 
 const MenuItemBox = styled.div`
     width: 30rem;
@@ -10,6 +11,7 @@ const MenuItemBox = styled.div`
     padding: 1rem;
     box-sizing: border-box;
     margin: 1.5rem;
+    position: relative;
 `;
 
 const WeekDay = styled.div`
@@ -22,10 +24,25 @@ const RecipeItem = styled.div`
     text-align: center;
 `;
 
+const StyledAddButton = styled(AddButton)`
+    fill: var(--color-primary-dark);
+    cursor: pointer;
+    transition: all 0.3s;
+    height: 2rem;
+    position: absolute;
+    top: 1.5rem;;
+    right: 1rem;
+
+    :hover {
+        transform: scale(1.1);
+        fill: var(--color-primary);
+    }
+`;
 
 const MenuItem = (props) => (
     <MenuItemBox>
         <WeekDay>{props.weekDay}</WeekDay>
+        <StyledAddButton onClick={props.click}/>
         <RecipeItem>{props.recipeItem}</RecipeItem>
     </MenuItemBox>
 );
