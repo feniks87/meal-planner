@@ -31,7 +31,7 @@ const StyledModalBox = styled.div`
 
 const ModalName = styled.h2`
     background: var(--color-primary);
-    padding: 1.5rem;
+    padding: 1rem;
     margin: 0;
 `;
 
@@ -55,8 +55,15 @@ const Modal = (props) => {
     return (
         <StyledModal show={props.show}>
             <StyledModalBox >
-                <ModalName>{props.name}</ModalName>
-                <ModalContent>{props.content}</ModalContent>
+                <ModalName>{props.recipe.name}</ModalName>
+                <ModalContent>
+                    <ModalIngs>
+                        {props.recipe.ings}
+                    </ModalIngs>
+                    <ModalDirections>
+                        {props.recipe.directions}
+                    </ModalDirections>
+                </ModalContent>
                 <ModalActions>
                     <Button onClick={props.closeHandler}>Close</Button>
                 </ModalActions>

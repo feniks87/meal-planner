@@ -64,14 +64,6 @@ const Rectangle = styled.div`
     z-index: 20;
 `;
 
-const ModalRecipeIngs = styled.div`
-    padding: 1rem;
-`;
-
-const ModalRecipeDirections = styled.div`
-    padding: 1rem;
-`;
-
 const RecipeList = () => {
     const [searchName, setSearchName] = useState("");
     const recipes = useSelector(state => state.recipeReducer.recipes);
@@ -98,11 +90,6 @@ const RecipeList = () => {
 
     const filteredRecepies = (recipeList) => recipeList.filter(recipe => !searchName || searchName.length === 0 || recipe.name.toLowerCase().includes(searchName.toLowerCase()))
 
-    const modalRecipeContent =  <div>
-                                    <ModalRecipeIngs>{selectedRecipe.ings}</ModalRecipeIngs>
-                                    <ModalRecipeDirections>{selectedRecipe.directions}</ModalRecipeDirections>
-                                </div>
-
     return (
         <div>
             <Wrapper >
@@ -119,8 +106,7 @@ const RecipeList = () => {
                     )}
                     <Modal
                         show={isOpen ? "show" : ""}
-                        name={selectedRecipe.name}
-                        content={modalRecipeContent}
+                        recipe={selectedRecipe}
                         closeHandler={closeModalHandler}/>
                 </StyledList>
                 <Rectangle/>
