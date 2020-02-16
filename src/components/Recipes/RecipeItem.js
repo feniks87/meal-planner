@@ -1,13 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledRecipe = styled.div`
+const StyledRecipeBox = styled.div`
     display: grid;
     grid-template-columns: 10rem 1fr;
     grid-template-rows: repeat(3, min-content);
     row-gap: 1rem;
     column-gap: 2rem;
-    margin-top: 5rem;
+    margin-top: 3rem;
+    padding: 1.5rem;
+    box-shadow: 0 0 1rem rgba(0,0,0,.1);
+    cursor: pointer;
+    transition: all .2s;
+
+    :hover {
+        box-shadow: 0 0rem 2rem rgba(0,0,0,.2);
+    }
 `;
 
 const StyledImage = styled.img`
@@ -24,6 +32,11 @@ const StyledRecipeName = styled.div`
     font-size: 2rem;
     font-weight: 700;
     cursor: pointer;
+    transition: all .2s;
+
+    :hover {
+        color: var(--color-primary-dark);
+    }
 `;
 
 const StyledRecipeIngs = styled.div`
@@ -39,12 +52,13 @@ const StyledRecipeDirections = styled.div`
 `;
 
 const RecipeItem = (props) => (
-    <StyledRecipe id={props.recipe.id}>
+    <StyledRecipeBox id={props.recipe.id}
+                    onClick={() => props.onClickHandler(props.recipe)}>
         <StyledImage src={props.recipe.imageURL || 'https://react.semantic-ui.com/images/wireframe/image.png'} />
-        <StyledRecipeName onClick={() => props.onClickHandler(props.recipe)}>{props.recipe.name}</StyledRecipeName>
+        <StyledRecipeName >{props.recipe.name}</StyledRecipeName>
         <StyledRecipeIngs>{props.recipe.ings}</StyledRecipeIngs>
         <StyledRecipeDirections>{props.directions}</StyledRecipeDirections>
-    </StyledRecipe>
+    </StyledRecipeBox>
 )
 
 export default RecipeItem;
