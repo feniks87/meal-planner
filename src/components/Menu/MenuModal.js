@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../../components/Button';
+import Button from '../Button';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchRecipes } from '../../actions/recipeActions';
 import RecipeItem from '../Recipes/RecipeItem';
+import { ReactComponent as CloseButton } from '../../assets/svg/close.svg'
 
 const StyledModal = styled.div`
     backdrop-filter: blur(5px);
@@ -21,7 +22,7 @@ const StyledModal = styled.div`
 const StyledModalBox = styled.div`
     position: absolute;
     width: 60vw;
-    max-height: 70vh;
+    max-height: 73vh;
     position: fixed;
     background-color: white;
     border-radius: 1px;
@@ -31,7 +32,6 @@ const StyledModalBox = styled.div`
     top: 20%;
     opacity: 1;
     z-index: 10000;
-    overflow: auto;
 `;
 
 const HeadingBox = styled.div`
@@ -40,6 +40,7 @@ const HeadingBox = styled.div`
     background: var(--color-primary);
     width: 60vw;
     position: fixed;
+    box-shadow: 0 0 1rem rgba(0,0,0,.1);
 `;
 
 const ModalName = styled.h2`
@@ -54,7 +55,7 @@ const SearchInputBox = styled.input`
     color: #91928d;
     border-radius: 1px;
     margin: 1.5rem;
-    margin-right: 2.8rem;
+    margin-right: 5rem;
     padding: 1rem;
 
     ::placeholder {
@@ -68,14 +69,27 @@ const SearchInputBox = styled.input`
     }
 `;
 
+const StyledIconButton = styled(CloseButton)`
+    fill: var(--color-grey);
+    cursor: pointer;
+    transition: all 0.3s;
+    height: 1.7rem;
+    position: absolute;
+    top: 1.5rem;;
+    right: 1rem;
+`;
+
 const ModalContent = styled.div`
     margin-top: 6rem;
     padding: 1rem;
+    max-height: 35rem;
+    overflow: auto;
 `;
 
 const ModalActions = styled.div`
     display: flex;
-    justify-content: flex-end;;
+    justify-content: flex-end;
+    box-shadow: 0 0 1rem rgba(0,0,0,.1);
 `;
 
 const ModalMenu = (props) => {
@@ -99,6 +113,7 @@ const ModalMenu = (props) => {
                 <HeadingBox>
                     <ModalName>Select a recipe</ModalName>
                     <SearchInputBox type="text" name="name" value={searchName} onChange={inputHanler} placeholder="Search..."/>
+                    <StyledIconButton onClick={props.closeHandler}/>
                 </HeadingBox>
                 <ModalContent>
                     {filteredRecepies(recipes).map(item =>

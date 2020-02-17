@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../components/Button';
+import Button from '../Button';
+import { ReactComponent as CloseButton } from '../../assets/svg/close.svg'
 
 const StyledModal = styled.div`
     backdrop-filter: blur(5px);
@@ -30,9 +31,25 @@ const StyledModalBox = styled.div`
 `;
 
 const ModalName = styled.h2`
-    background: var(--color-primary);
     padding: 1rem;
     margin: 0;
+`;
+
+const HeadingBox = styled.div`
+    display: flex;
+    justify-content: space-between;
+    background: var(--color-primary);
+    box-shadow: 0 0 1rem rgba(0,0,0,.1);
+`;
+
+const StyledIconButton = styled(CloseButton)`
+    fill: var(--color-grey);
+    cursor: pointer;
+    transition: all 0.3s;
+    height: 1.7rem;
+    position: absolute;
+    top: 1.5rem;;
+    right: 1rem;
 `;
 
 const ModalContent = styled.div`
@@ -49,13 +66,18 @@ const ModalDirections = styled.div`
 
 const ModalActions = styled.div`
     display: flex;
+    box-shadow: 0 0 1rem rgba(0,0,0,.1);
 `;
 
 const Modal = (props) => {
     return (
         <StyledModal show={props.show}>
             <StyledModalBox >
-                <ModalName>{props.recipe.name}</ModalName>
+                <HeadingBox>
+                    <ModalName>{props.recipe.name}</ModalName>
+                    <StyledIconButton onClick={props.closeHandler}/>
+                </HeadingBox>
+
                 <ModalContent>
                     <ModalIngs>
                         {props.recipe.ings}

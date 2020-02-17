@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from '../Header';
 import MenuItem from './MenuItem';
-import ModalMenu from './ModalMenu';
+import MenuModal from './MenuModal';
 import { useState } from 'react';
 
 const Wrapper = styled.div`
@@ -81,7 +81,7 @@ const WeeklyMenu = () => {
                     recipeItem="Teriyaki chicken"
                     click={openModalHandler} />
             </StyledMenuBox>
-            <ModalMenu
+            <MenuModal
                 show={isOpen ? "show" : ""}
                 submitHandler={submitRecipeHandler}
                 closeHandler={closeModalHandler}

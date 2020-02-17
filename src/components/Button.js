@@ -9,15 +9,15 @@ const StyledButton = styled.button`
     outline: none;
     cursor: pointer;
     padding: 1.5rem;
-    margin: ${props => props.margin || "3rem 2rem"};
+    margin: ${props => props.margin || "3rem 1.5rem"};
     font-size: 1.5rem;
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
     transition: all .2s;
 
     :hover {
         background-color: var(--color-primary);
-        font-weight: 600;
+
     }
 `;
 

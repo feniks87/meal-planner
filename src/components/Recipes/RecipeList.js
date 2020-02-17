@@ -4,7 +4,7 @@ import RecipeItem from './RecipeItem';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import {fetchRecipes} from '../../actions/recipeActions';
-import Modal from '../Modal';
+import RecipeModal from './RecipeModal';
 
 const Wrapper = styled.div`
     display: grid;
@@ -99,7 +99,7 @@ const RecipeList = () => {
                             recipe={item}
                         />
                     )}
-                    <Modal
+                    <RecipeModal
                         show={isOpen ? "show" : ""}
                         recipe={selectedRecipe}
                         closeHandler={closeModalHandler}/>
