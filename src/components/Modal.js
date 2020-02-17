@@ -65,7 +65,7 @@ const Modal = (props) => {
                     </ModalDirections>
                 </ModalContent>
                 <ModalActions>
-                    <Button onClick={props.closeHandler}>Close</Button>
+                    <Button margin="3rem auto" onClick={props.closeHandler}>Close</Button>
                 </ModalActions>
             </StyledModalBox>
         </StyledModal>
