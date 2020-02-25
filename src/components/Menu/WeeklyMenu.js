@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import Header from '../Header';
 import MenuItem from './MenuItem';
 import MenuModal from './MenuModal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from '../../helpers/axios-instance';
 
 const Wrapper = styled.div`
     display: grid;
@@ -33,6 +34,27 @@ const Rectangle = styled.div`
 
 const WeeklyMenu = () => {
     const [isOpen, setOpenModal] = useState(false);
+    const [menu, setMenu] = useState([])
+
+
+    useEffect(() => {
+        axios.get('/menu.json')
+            .then(menuItems => {
+            const fetchedMenu = [];
+            for (let key in menuItems.data) {
+                fetchedMenu.push({
+                    ...menuItems.data[key]
+
+                });
+            }
+            setMenu(fetchedMenu);
+            console.log(fetchedMenu);
+        })
+        .catch(error => {
+            error.toString();
+        });
+    }, []);
+
 
 
     const closeModalHandler = () => {
@@ -52,34 +74,14 @@ const WeeklyMenu = () => {
         <Wrapper>
             <Header />
             <StyledMenuBox>
-                <MenuItem
-                    weekDay="Monday"
-                    recipeItem="Teriyaki chicken"
-                    click={openModalHandler} />
-                <MenuItem
-                    weekDay="Tuesday"
-                    recipeItem="Teriyaki chicken"
-                    click={openModalHandler} />
-                <MenuItem
-                    weekDay="Wednesday"
-                    recipeItem="Teriyaki chicken"
-                    click={openModalHandler} />
-                <MenuItem
-                    weekDay="Thursday"
-                    recipeItem="Teriyaki chicken"
-                    click={openModalHandler} />
-                <MenuItem
-                    weekDay="Friday"
-                    recipeItem="Teriyaki chicken"
-                    click={openModalHandler} />
-                <MenuItem
-                    weekDay="Saturday"
-                    recipeItem="Teriyaki chicken"
-                    click={openModalHandler} />
-                <MenuItem
-                    weekDay="Sunday"
-                    recipeItem="Teriyaki chicken"
-                    click={openModalHandler} />
+                {menu.map(menuItem =>
+                    <MenuItem
+                        weekDay={menuItem.day}
+                        recipeItem={menuItem.recipe}
+                        click={openModalHandler}
+                    />
+                )}
+
             </StyledMenuBox>
             <MenuModal
                 show={isOpen ? "show" : ""}
