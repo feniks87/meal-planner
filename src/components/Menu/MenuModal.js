@@ -16,7 +16,7 @@ const StyledModal = styled.div`
     top: 0;
     left: 0;
     z-index: 100;
-    visibility: ${props => props.show ? "visible" : "hidden"};
+    display: ${props => props.show ? "block" : "none"};
 `;
 
 const StyledModalBox = styled.div`
@@ -117,7 +117,9 @@ const ModalMenu = (props) => {
                 </HeadingBox>
                 <ModalContent>
                     {filteredRecepies(recipes).map(item =>
-                        <RecipeItem recipe={item}/>
+                        <RecipeItem
+                            recipe={item}
+                            onClickHandler={props.onClickHandler}/>
                         )}
                 </ModalContent>
                 <ModalActions>

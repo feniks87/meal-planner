@@ -34,8 +34,8 @@ const Rectangle = styled.div`
 
 const WeeklyMenu = () => {
     const [isOpen, setOpenModal] = useState(false);
-    const [menu, setMenu] = useState([])
-
+    const [menu, setMenu] = useState([]);
+    const [weekDay, setWeekDay] = useState("");
 
     useEffect(() => {
         axios.get('/menu.json')
@@ -44,30 +44,31 @@ const WeeklyMenu = () => {
             for (let key in menuItems.data) {
                 fetchedMenu.push({
                     ...menuItems.data[key]
-
                 });
             }
             setMenu(fetchedMenu);
-            console.log(fetchedMenu);
         })
-        .catch(error => {
-            error.toString();
-        });
+        .catch(error => {error.toString()});
     }, []);
-
-
 
     const closeModalHandler = () => {
         setOpenModal(!isOpen);
-
     };
 
-    const openModalHandler = () => {
+    const openModalHandler = (weekDay) => {
         setOpenModal(!isOpen);
+        setWeekDay(weekDay);
     };
 
-    const submitRecipeHandler = () => {
-
+    const submitRecipeHandler = (recipe) => {
+        setOpenModal(!isOpen);
+        const newMenu = menu.map(item =>
+            item.day === weekDay ? {...item, recipe: recipe.name} : item
+            );
+        setMenu(newMenu);
+        axios.put('/menu.json', newMenu)
+            .then(response => console.log(response))
+            .catch(error => error.toString())
     };
 
     return (
@@ -78,21 +79,16 @@ const WeeklyMenu = () => {
                     <MenuItem
                         weekDay={menuItem.day}
                         recipeItem={menuItem.recipe}
-                        click={openModalHandler}
-                    />
+                        click={openModalHandler} />
                 )}
-
             </StyledMenuBox>
             <MenuModal
                 show={isOpen ? "show" : ""}
-                submitHandler={submitRecipeHandler}
-                closeHandler={closeModalHandler}
-            />
+                onClickHandler={submitRecipeHandler}
+                closeHandler={closeModalHandler} />
             <Rectangle />
         </Wrapper>
     )
-
-
 }
 
 export default WeeklyMenu;

@@ -12,7 +12,7 @@ const StyledModal = styled.div`
     top: 0;
     left: 0;
     z-index: 100;
-    visibility: ${props => props.show ? "visible" : "hidden"};
+    display: ${props => props.show ? "block" : "none"};
 `;
 
 const StyledModalBox = styled.div`

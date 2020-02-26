@@ -42,10 +42,9 @@ const StyledAddButton = styled(AddButton)`
 const MenuItem = (props) => (
     <MenuItemBox>
         <WeekDay>{props.weekDay}</WeekDay>
-        <StyledAddButton onClick={props.click}/>
+        <StyledAddButton onClick={() => props.click(props.weekDay)}/>
         <RecipeItem>{props.recipeItem}</RecipeItem>
     </MenuItemBox>
 );
 
 export default MenuItem;
-
