@@ -43,7 +43,10 @@ const MenuItem = (props) => (
     <MenuItemBox>
         <WeekDay>{props.weekDay}</WeekDay>
         <StyledAddButton onClick={() => props.click(props.weekDay)}/>
-        <RecipeItem>{props.recipeItem}</RecipeItem>
+        {props.recipeItems !== undefined ? props.recipeItems.map(item =>
+            <RecipeItem>{item.name}</RecipeItem>
+        ) : null}
+
     </MenuItemBox>
 );
 

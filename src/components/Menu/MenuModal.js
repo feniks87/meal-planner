@@ -95,17 +95,30 @@ const ModalActions = styled.div`
 const ModalMenu = (props) => {
     const [searchName, setSearchName] = useState("");
     const recipes = useSelector(state => state.recipeReducer.recipes);
+    const [selectedRecipes, setSelectedRecipes] = useState([]);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchRecipes());
     }, [dispatch]);
 
-    const inputHanler = (event) => {
+    useEffect(() => {
+        setSelectedRecipes(props.currentRecipes === undefined ? [] : props.currentRecipes)
+    }, [props.currentRecipes]);
+
+    const inputHanler = event => {
         setSearchName(event.target.value);
     };
 
-    const filteredRecepies = (recipeList) => recipeList.filter(recipe => !searchName || searchName.length === 0 || recipe.name.toLowerCase().includes(searchName.toLowerCase()));
+
+    const selectHandler = recipe => {
+        setSelectedRecipes(prevRecipes =>
+            !prevRecipes.some(item => item.name === recipe.name) ? [...prevRecipes, recipe] : prevRecipes.filter(item => item.name !== recipe.name));
+        };
+
+    const filteredRecipes = (recipeList) => recipeList.filter(recipe => !searchName || searchName.length === 0 || recipe.name.toLowerCase().includes(searchName.toLowerCase()));
+
+
 
     return (
         <StyledModal show={props.show}>
@@ -116,19 +129,20 @@ const ModalMenu = (props) => {
                     <StyledIconButton onClick={props.closeHandler}/>
                 </HeadingBox>
                 <ModalContent>
-                    {filteredRecepies(recipes).map(item =>
+                    {filteredRecipes(recipes).map(item =>
                         <RecipeItem
+                            selected={selectedRecipes.some(recipe => item.name === recipe.name) ? "1.5px solid var(--color-primary-light)" : null }
                             recipe={item}
-                            onClickHandler={props.onClickHandler}/>
+                            onClickHandler={selectHandler}/>
                         )}
                 </ModalContent>
                 <ModalActions>
-                    <Button onClick={props.submitHandler}>select</Button>
+                    <Button onClick={() => props.submitHandler(selectedRecipes)}>select</Button>
                     <Button onClick={props.closeHandler}>Close</Button>
                 </ModalActions>
             </StyledModalBox>
         </StyledModal>
     )
-}
+};
 
 export default ModalMenu;

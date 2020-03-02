@@ -12,6 +12,7 @@ const StyledRecipeBox = styled.div`
     box-shadow: 0 0 1rem rgba(0,0,0,.1);
     cursor: pointer;
     transition: all .2s;
+    border: ${props => props.selected || null};
 
     :hover {
         box-shadow: 0 0 2rem rgba(0,0,0,.3);
@@ -52,7 +53,7 @@ const StyledRecipeDirections = styled.div`
 `;
 
 const RecipeItem = (props) => (
-    <StyledRecipeBox id={props.recipe.id}
+    <StyledRecipeBox id={props.recipe.id} selected={props.selected}
                     onClick={() => props.onClickHandler(props.recipe)}>
         <StyledImage src={props.recipe.imageURL || 'https://react.semantic-ui.com/images/wireframe/image.png'} />
         <StyledRecipeName >{props.recipe.name}</StyledRecipeName>

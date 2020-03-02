@@ -36,6 +36,7 @@ const WeeklyMenu = () => {
     const [isOpen, setOpenModal] = useState(false);
     const [menu, setMenu] = useState([]);
     const [weekDay, setWeekDay] = useState("");
+    const [selectedRecipes, setSelectedRecipes] = useState([]);
 
     useEffect(() => {
         axios.get('/menu.json')
@@ -58,12 +59,16 @@ const WeeklyMenu = () => {
     const openModalHandler = (weekDay) => {
         setOpenModal(!isOpen);
         setWeekDay(weekDay);
+
+        const currentDayMenu = menu.find(item => item.day === weekDay);
+        const currentRecipes = currentDayMenu.recipes;
+        setSelectedRecipes(currentRecipes);
     };
 
-    const submitRecipeHandler = (recipe) => {
+    const submitRecipeHandler = (recipes) => {
         setOpenModal(!isOpen);
         const newMenu = menu.map(item =>
-            item.day === weekDay ? {...item, recipe: recipe.name} : item
+            item.day === weekDay ? {...item, recipes: recipes} : item
             );
         setMenu(newMenu);
         axios.put('/menu.json', newMenu)
@@ -78,17 +83,19 @@ const WeeklyMenu = () => {
                 {menu.map(menuItem =>
                     <MenuItem
                         weekDay={menuItem.day}
-                        recipeItem={menuItem.recipe}
-                        click={openModalHandler} />
+                        recipeItems={menuItem.recipes}
+                        click={openModalHandler}
+                         />
                 )}
             </StyledMenuBox>
             <MenuModal
                 show={isOpen ? "show" : ""}
-                onClickHandler={submitRecipeHandler}
-                closeHandler={closeModalHandler} />
+                submitHandler={submitRecipeHandler}
+                closeHandler={closeModalHandler}
+                currentRecipes={selectedRecipes}/>
             <Rectangle />
         </Wrapper>
     )
-}
+};
 
 export default WeeklyMenu;
