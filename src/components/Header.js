@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import HeaderImage from '../assets/header.jpg';
+import BackgroundImg from '../assets/cover.jpg';
 import NavBar from '../components/Navigation/NavBar';
 
 const StyledHeader = styled.header`
@@ -16,8 +17,8 @@ const StyledHeader = styled.header`
 const BackgroundImage = styled.div`
     grid-column: 1 / -1;
     grid-row: 1 / -1;
-    background-image: url(${HeaderImage});
-    filter: blur(10px);
+    background-image: url(${BackgroundImg});
+    opacity: 0.6;
     background-size: cover;
     background-position: top;
     z-index: 1;

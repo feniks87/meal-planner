@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
 import NavBar from '../components/Navigation/NavBar';
+import BackgroundImage from '../assets/background.jpg';
 
 const Wrapper = styled.div`
     font-size: 2rem;
@@ -13,6 +14,8 @@ const Wrapper = styled.div`
 const Content = styled.main`
     grid-row: 2;
     grid-column: 1 / -1;
+    background-image: url(${BackgroundImage});
+    background-size: cover;
 `;
 
 const Layout = (props) => (
