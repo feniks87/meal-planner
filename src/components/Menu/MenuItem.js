@@ -4,7 +4,7 @@ import { ReactComponent as AddButton } from '../../assets/svg/plus.svg';
 
 const MenuItemBox = styled.div`
     width: 30rem;
-    height: 15rem;
+    min-height: 15rem;
     background-color: white;
     box-shadow: 0 3px 10px #ccc;
     border: 1px solid #eee;

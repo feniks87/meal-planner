@@ -6,20 +6,29 @@ import NavBar from '../components/Navigation/NavBar';
 const StyledHeader = styled.header`
     grid-column: 1 / -1;
     height: 46rem;
-    background-color: var(--color-tertiary);
-    background-size: cover;
-    background-position: top;
-    border-bottom: 4px solid var(--color-primary);
     display: grid;
     justify-content: center;
     grid-template-rows: 4rem repeat(7, 1fr);
     grid-template-columns: repeat(15, 1fr);
+    border-bottom: 1px solid var(--color-primary-light);
 `;
 
-const Quote = styled.div`
+const BackgroundImage = styled.div`
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    background-image: url(${HeaderImage});
+    filter: blur(10px);
+    background-size: cover;
+    background-position: top;
+    z-index: 1;
+`;
+
+const QuoteBox = styled.div`
     grid-column: 5 / 10;
     grid-row: 5/ 7;
     font-size: 2.5rem;
+    z-index: 100;
+
 `;
 
 const QuoteText = styled.div`
@@ -34,8 +43,9 @@ const QuoteAuthor = styled.div`
 const Text = styled.div`
     grid-column: 3 / 4;
     grid-row: 4 / 8;
-
+    z-index: 100;
     display: grid;
+
 `;
 
 const TextItem = styled.div`
@@ -54,7 +64,7 @@ const Image = styled.div`
 
 const Rectangle = styled.div`
     grid-column: 12 / 16;
-    grid-row: 1 / -1;
+    grid-row: 2 / -1;
 
     background-color: var(--color-primary);
     z-index: 20;
@@ -62,16 +72,17 @@ const Rectangle = styled.div`
 
 const Header = () => (
     <StyledHeader>
+        <BackgroundImage />
         <NavBar />
         <Text>
             <TextItem>Plan,</TextItem>
             <TextItem>Shop,</TextItem>
             <TextItem>Cook.</TextItem>
         </Text>
-        <Quote>
+        <QuoteBox>
             <QuoteText>People want honest, flavourful food, not some show-off meal that takes days to prepare.</QuoteText>
             <QuoteAuthor>Ted Allen</QuoteAuthor>
-        </Quote>
+        </QuoteBox>
         <Image />
         <Rectangle />
     </StyledHeader>

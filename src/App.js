@@ -7,13 +7,13 @@ import CreateRecipe from './components/Recipes/CreateRecipe';
 import WeeklyMenu from './components/Menu/WeeklyMenu';
 import { clearMessage } from './actions/alertActions';
 import { history } from './helpers/history';
+import HomePage from './components/Home/HomePage';
 
 
 function App() {
 
   const dispatch = useDispatch();
   history.listen((location, action) => {
-    console.log('changed' + location)
     dispatch(clearMessage());
 });
 
@@ -21,7 +21,8 @@ function App() {
     <Router history={history}>
       <Layout>
         <Switch>
-          <Route path="/menu" component={WeeklyMenu} />
+          <Route exact path="/" component={HomePage}/>
+          <Route path="/menu" component={WeeklyMenu}/>
           <Route path="/recipe-list" component={RecipeList} />
           <Route path="/create-recipe" component={CreateRecipe} />
         </Switch>

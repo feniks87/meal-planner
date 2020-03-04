@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from '../Header';
 import MenuItem from './MenuItem';
 import MenuModal from './MenuModal';
 import { useState, useEffect } from 'react';
@@ -8,12 +7,22 @@ import axios from '../../helpers/axios-instance';
 
 const Wrapper = styled.div`
     display: grid;
-    grid-template-rows: 46rem 10rem min-content min-content 7rem;
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: min-content 10rem min-content 7rem;
+    grid-template-columns: repeat(13, 1fr);
+    margin: 10rem 0;
+`;
+
+const Heading = styled.h2`
+    grid-column: 5 / 11;
+    grid-row: 2 / 3;
+    margin-left: 8rem;
+    align-self: center;
+    color: var(--color-grey);
+    z-index: 100;
 `;
 
 const StyledMenuBox = styled.div`
-    grid-column: 3 / -3;
+    grid-column: 4 / -4;
     grid-row: 3;
     box-sizing: border-box;
     z-index: 100;
@@ -21,15 +30,15 @@ const StyledMenuBox = styled.div`
     flex-wrap: wrap;
     justify-content: space-around;
     align-content: space-between;
-    padding: 7rem;
+    margin: -1.5rem 0;
 `;
 
 const Rectangle = styled.div`
-    grid-column: 4 / 9;
-    grid-row: 2 / -2;
+    grid-column: 5 / 11;
+    grid-row: 1 / 4;
     background-color: var(--color-primary);
     z-index: 20;
-    margin: 10rem 0;
+    margin-bottom: 2rem;
 `;
 
 const WeeklyMenu = () => {
@@ -78,7 +87,7 @@ const WeeklyMenu = () => {
 
     return (
         <Wrapper>
-            <Header />
+            <Heading>Menu</Heading>
             <StyledMenuBox>
                 {menu.map(menuItem =>
                     <MenuItem
@@ -88,12 +97,13 @@ const WeeklyMenu = () => {
                          />
                 )}
             </StyledMenuBox>
+            <Rectangle />
             <MenuModal
                 show={isOpen ? "show" : ""}
                 submitHandler={submitRecipeHandler}
                 closeHandler={closeModalHandler}
                 currentRecipes={selectedRecipes}/>
-            <Rectangle />
+
         </Wrapper>
     )
 };

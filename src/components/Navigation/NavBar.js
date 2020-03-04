@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import NavItems from './NavItems';
 import Logo from '../Logo';
 import LogoImg from '../../assets/logo.png';
+import { NavLink } from 'react-router-dom'
 
 const StyledNav = styled.nav`
     grid-column: 1 / -1;
@@ -14,13 +15,14 @@ const StyledNav = styled.nav`
     background-color: #ffff;
     z-index: 150;
     display: flex;
-    border-bottom: 2px solid var(--color-primary-light);
+    border-bottom: 2px solid var(--color-primary);
     padding: 1.5rem;
+    background-color: var(--color-primary-light);
 `;
 
 const NavBar = () => (
     <StyledNav>
-        <Logo src={LogoImg}/>
+        <NavLink to="/"><Logo src={LogoImg}/></NavLink>
         <NavItems />
     </StyledNav>
 );

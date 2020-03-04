@@ -131,7 +131,7 @@ const ModalMenu = (props) => {
                 <ModalContent>
                     {filteredRecipes(recipes).map(item =>
                         <RecipeItem
-                            selected={selectedRecipes.some(recipe => item.name === recipe.name) ? "1.5px solid var(--color-primary-light)" : null }
+                            selected={selectedRecipes.some(recipe => item.name === recipe.name) ? "2px solid var(--color-primary-light)" : null }
                             recipe={item}
                             onClickHandler={selectHandler}/>
                         )}
