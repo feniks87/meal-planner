@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MenuItem from './MenuItem';
 import MenuModal from './MenuModal';
+import RecipeModal from '../Recipes/RecipeModal';
 import { useState, useEffect } from 'react';
 import axios from '../../helpers/axios-instance';
 
@@ -42,11 +43,12 @@ const Rectangle = styled.div`
 `;
 
 const WeeklyMenu = () => {
-    const [isOpen, setOpenModal] = useState(false);
+    const [isOpenMenuModal, setOpenMenuModal] = useState(false);
+    const [isOpenRecipeModal, setOpenRecipeModal] = useState(false);
     const [menu, setMenu] = useState([]);
     const [weekDay, setWeekDay] = useState("");
     const [selectedRecipes, setSelectedRecipes] = useState([]);
-
+    const [selectedRecipe, setSelectedRecipe] = useState({});
     useEffect(() => {
         axios.get('/menu.json')
             .then(menuItems => {
@@ -61,21 +63,29 @@ const WeeklyMenu = () => {
         .catch(error => {error.toString()});
     }, []);
 
-    const closeModalHandler = () => {
-        setOpenModal(!isOpen);
+    const closeModalMenuHandler = () => {
+        setOpenMenuModal(!isOpenMenuModal);
     };
 
-    const openModalHandler = (weekDay) => {
-        setOpenModal(!isOpen);
+    const openMenuModalHandler = (weekDay) => {
+        setOpenMenuModal(!isOpenMenuModal);
         setWeekDay(weekDay);
-
         const currentDayMenu = menu.find(item => item.day === weekDay);
         const currentRecipes = currentDayMenu.recipes;
         setSelectedRecipes(currentRecipes);
     };
 
+    const openRecipeModalHandler = (recipe) => {
+        setOpenRecipeModal(!isOpenRecipeModal);
+        setSelectedRecipe(recipe);
+    }
+
+    const closeModalRecipeHandler = () => {
+        setOpenRecipeModal(!isOpenRecipeModal);
+    };
+
     const submitRecipeHandler = (recipes) => {
-        setOpenModal(!isOpen);
+        setOpenMenuModal(!isOpenMenuModal);
         const newMenu = menu.map(item =>
             item.day === weekDay ? {...item, recipes: recipes} : item
             );
@@ -93,17 +103,21 @@ const WeeklyMenu = () => {
                     <MenuItem
                         weekDay={menuItem.day}
                         recipeItems={menuItem.recipes}
-                        click={openModalHandler}
+                        buttonClick={openMenuModalHandler}
+                        itemClick={openRecipeModalHandler}
                          />
                 )}
             </StyledMenuBox>
             <Rectangle />
             <MenuModal
-                show={isOpen ? "show" : ""}
+                show={isOpenMenuModal ? "show" : ""}
                 submitHandler={submitRecipeHandler}
-                closeHandler={closeModalHandler}
+                closeHandler={closeModalMenuHandler}
                 currentRecipes={selectedRecipes}/>
-
+            <RecipeModal
+                show={isOpenRecipeModal ? "show" : ""}
+                recipe={selectedRecipe}
+                closeHandler={closeModalRecipeHandler}/>
         </Wrapper>
     )
 };

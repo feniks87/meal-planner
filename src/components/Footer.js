@@ -34,7 +34,7 @@ const Footer = () => (
         <StyledLogo>
             <Logo src={LogoImg}/>
         </StyledLogo>
-        < Copyright>&copy; 2019 Meal planner</Copyright>
+        < Copyright>&copy; 2020 Meal planner</Copyright>
     </StyledFooter>
 );
 

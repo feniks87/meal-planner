@@ -22,6 +22,7 @@ const WeekDay = styled.div`
 
 const RecipeItem = styled.div`
     text-align: center;
+    cursor: pointer;
 `;
 
 const StyledAddButton = styled(AddButton)`
@@ -42,9 +43,9 @@ const StyledAddButton = styled(AddButton)`
 const MenuItem = (props) => (
     <MenuItemBox>
         <WeekDay>{props.weekDay}</WeekDay>
-        <StyledAddButton onClick={() => props.click(props.weekDay)}/>
+        <StyledAddButton onClick={() => props.buttonClick(props.weekDay)}/>
         {props.recipeItems !== undefined ? props.recipeItems.map(item =>
-            <RecipeItem>{item.name}</RecipeItem>
+            <RecipeItem onClick={() => props.itemClick(item)}>{item.name}</RecipeItem>
         ) : null}
 
     </MenuItemBox>
