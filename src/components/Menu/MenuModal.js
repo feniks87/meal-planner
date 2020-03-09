@@ -118,7 +118,12 @@ const ModalMenu = (props) => {
 
     const filteredRecipes = (recipeList) => recipeList.filter(recipe => !searchName || searchName.length === 0 || recipe.name.toLowerCase().includes(searchName.toLowerCase()));
 
-
+    const sortedRecipes = filteredRecipes(recipes).sort((a, b) => {
+        if (selectedRecipes.some(recipe => a.name === recipe.name)) {
+            return -1;
+        }
+        return 1;
+    })
 
     return (
         <StyledModal show={props.show}>
@@ -129,7 +134,7 @@ const ModalMenu = (props) => {
                     <StyledIconButton onClick={props.closeHandler}/>
                 </HeadingBox>
                 <ModalContent>
-                    {filteredRecipes(recipes).map(item =>
+                    {sortedRecipes.map(item =>
                         <RecipeItem
                             selected={selectedRecipes.some(recipe => item.name === recipe.name) ? "2px solid var(--color-primary-light)" : null }
                             recipe={item}
