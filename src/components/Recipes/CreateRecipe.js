@@ -212,13 +212,14 @@ const CreateRecipe = () => {
     const submitHandler = event => {
         event.preventDefault();
         if (recipe && recipe.name && recipe.ings && recipe.directions) {
+            window.scrollTo(0, 0);
             dispatch(createRecipe(recipe));
         } else {
+            window.scrollTo(0, 0);
             dispatch(errorMessage("Please fill all the fields"));
         }
         setRecipeItem(initialRecipe);
     };
-
 
     return (
         <Wrapper>

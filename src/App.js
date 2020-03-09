@@ -8,7 +8,7 @@ import WeeklyMenu from './components/Menu/WeeklyMenu';
 import { clearMessage } from './actions/alertActions';
 import { history } from './helpers/history';
 import HomePage from './components/Home/HomePage';
-
+import ScrollToTop from './helpers/ScrollToTop';
 
 function App() {
 
@@ -20,6 +20,7 @@ function App() {
   return (
     <Router history={history}>
       <Layout>
+        <ScrollToTop />
         <Switch>
           <Route exact path="/" component={HomePage}/>
           <Route path="/menu" component={WeeklyMenu}/>
