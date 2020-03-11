@@ -17,6 +17,7 @@ const StyledLink = styled(NavLink)`
     width: 100%;
     box-sizing: border-box;
     display: block;
+    transition: all .2s;
 
     &:hover {
         color: var(--color-grey);

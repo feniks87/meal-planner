@@ -39,7 +39,7 @@ const SearchInputBox = styled.input`
     margin-top: .8rem;
     margin-bottom: .8rem;
     font-size: 1.7rem;
-    border: 1px solid var(--color-primary-light);
+    border: 1.5px solid var(--color-primary-light);
     color: #91928d;
     border-radius: 1px;
 
