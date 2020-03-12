@@ -5,6 +5,7 @@ import Header from '../Header';
 import RecipeItemBox from './RecipeItemBox';
 import { fetchRecipes } from '../../actions/recipeActions';
 import { NavLink } from 'react-router-dom';
+import RecipeModal from '../Recipes/RecipeModal';
 
 const Wrapper = styled.div`
     display: grid;
@@ -59,8 +60,11 @@ const RecipeLink = styled(NavLink)`
 const HomePage = () => {
     const allRecipes = useSelector(state => state.recipeReducer.recipes);
     const dispatch = useDispatch();
+    const [isOpenRecipeModal, setOpenRecipeModal] = useState(false);
+    const [selectedRecipe, setSelectedRecipe] = useState({});
+    const [randomRecipes, setRandomRecipes] = useState([]);
 
-    const selectRecipesHandler = (recipes) => {
+    const getRandomRecipes = (recipes) => {
         if (recipes === undefined || recipes.length === 0) {
             return [];
         }
@@ -82,21 +86,41 @@ const HomePage = () => {
         dispatch(fetchRecipes());
     }, [dispatch]);
 
+    useEffect(() => {
+        let recipes = getRandomRecipes(allRecipes);
+        setRandomRecipes(recipes);
+    }, [allRecipes]);
+
+
+    const closeModalRecipeHandler = () => {
+        setOpenRecipeModal(!isOpenRecipeModal);
+    };
+
+    const openRecipeModalHandler = (recipe) => {
+        setOpenRecipeModal(!isOpenRecipeModal);
+        setSelectedRecipe(recipe);
+    }
+
     return (
         <Wrapper>
             <Header />
             <Content>
                 <Heading>Recipe Ideas</Heading>
                 <Recipes>
-                    {selectRecipesHandler(allRecipes).map(recipe =>
+                    {randomRecipes.map(recipe =>
                         <RecipeItemBox
                             recipe={recipe}
                             recipeName={recipe.name}
-                            image={recipe.imageURL || 'https://react.semantic-ui.com/images/wireframe/image.png'}/>
+                            image={recipe.imageURL || 'https://react.semantic-ui.com/images/wireframe/image.png'}
+                            click={openRecipeModalHandler}/>
                     )}
                 </Recipes>
                 <RecipeLink to="/recipe-list">Check all recipes</RecipeLink>
             </Content>
+            <RecipeModal
+                show={isOpenRecipeModal ? "show" : ""}
+                recipe={selectedRecipe}
+                closeHandler={closeModalRecipeHandler}/>
 
         </Wrapper>
     )

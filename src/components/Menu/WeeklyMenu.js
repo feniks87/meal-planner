@@ -8,7 +8,7 @@ import axios from '../../helpers/axios-instance';
 
 const Wrapper = styled.div`
     display: grid;
-    grid-template-rows: min-content 10rem min-content 7rem;
+    grid-template-rows: min-content 10rem min-content;
     grid-template-columns: repeat(13, 1fr);
     margin: 10rem 0;
 `;

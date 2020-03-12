@@ -32,7 +32,7 @@ const RecipeName = styled.div`
 
 const RecipeItemBox = (props) => {
     return (
-    <StyledItemBox image={props.image} recipe={props.recipe}>
+    <StyledItemBox image={props.image} recipe={props.recipe} onClick={() => props.click(props.recipe)}>
         <RecipeName>{props.recipeName}</RecipeName>
     </StyledItemBox>
     )
