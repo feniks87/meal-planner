@@ -6,7 +6,7 @@ const StyledRecipeBox = styled.div`
     grid-template-columns: 10rem 1fr;
     grid-template-rows: repeat(3, min-content);
     row-gap: .5rem;
-    column-gap: .5rem;
+    column-gap: .8rem;
     margin-top: 1.5rem;
     padding: 1rem;
     box-shadow: 0 0 1rem rgba(0,0,0,.1);
@@ -17,13 +17,23 @@ const StyledRecipeBox = styled.div`
     :hover {
         box-shadow: 0 0 2rem rgba(0,0,0,.3);
     }
+
+    @media (max-width: 550px) {
+        grid-template-columns: 1fr 10rem;
+        padding: 1.5rem;
+    }
 `;
 
 const StyledImage = styled.img`
     grid-column: 1;
     grid-row: 1 / 4;
-    width: 8rem;
-    height: 8rem;
+    width: 10rem;
+    height: 10rem;
+
+    @media (max-width: 550px) {
+        grid-row: 1 / 2;
+        grid-column: 2;
+    }
 `;
 
 const StyledRecipeName = styled.div`
@@ -38,12 +48,23 @@ const StyledRecipeName = styled.div`
     :hover {
         color: var(--color-primary-dark);
     }
+
+    @media (max-width: 550px) {
+        align-self: center;
+        grid-column: 1;
+        font-size: 2.3rem;
+    }
 `;
 
 const StyledRecipeIngs = styled.div`
     grid-column: 2;
     grid-row: 2;
     font-size: 1.6rem;
+
+    @media (max-width: 550px) {
+        grid-column: 1 / -1;
+        text-align: justify;
+    }
 `;
 
 const StyledRecipeDirections = styled.div`

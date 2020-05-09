@@ -32,6 +32,14 @@ const StyledModalBox = styled.div`
     top: 20%;
     opacity: 1;
     z-index: 10000;
+
+    @media (max-width: 550px) {
+        width: 80%;
+        left: 10%;
+        top: 20%;
+        max-height: 70%;
+        overflow: auto;
+    }
 `;
 
 const HeadingBox = styled.div`
@@ -41,6 +49,12 @@ const HeadingBox = styled.div`
     width: 60vw;
     position: fixed;
     box-shadow: 0 0 1rem rgba(0,0,0,.1);
+    
+    @media (max-width: 550px) {
+        flex-direction: column;
+        width: 80%;
+    }
+
 `;
 
 const ModalName = styled.h2`
@@ -67,6 +81,12 @@ const SearchInputBox = styled.input`
         border: 1px solid var(--color-primary-light);
         box-shadow: inset 0 1px 10px rgba(0, 0, 0, .075), 0 0 10px rgba(247, 220, 89, 1);
     }
+
+    @media (max-width: 550px) {
+        margin-top: 0;
+        margin-right: 1.5rem;
+        box-sizing: border-box;
+    }
 `;
 
 const StyledIconButton = styled(CloseButton)`
@@ -84,6 +104,10 @@ const ModalContent = styled.div`
     padding: 1rem;
     max-height: 35rem;
     overflow: auto;
+
+    @media (max-width: 550px) {
+        margin-top: 11rem;
+    }
 `;
 
 const ModalActions = styled.div`

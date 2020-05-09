@@ -5,12 +5,18 @@ import MenuModal from './MenuModal';
 import RecipeModal from '../Recipes/RecipeModal';
 import { useState, useEffect } from 'react';
 import axios from '../../helpers/axios-instance';
+import Rectangle from '../UI/Rectangle';
 
 const Wrapper = styled.div`
     display: grid;
     grid-template-rows: min-content 10rem min-content;
     grid-template-columns: repeat(13, 1fr);
     margin: 10rem 0;
+
+    
+    @media (max-width: 550px) {
+        margin: 0;
+    }
 `;
 
 const Heading = styled.h2`
@@ -20,6 +26,12 @@ const Heading = styled.h2`
     align-self: center;
     color: var(--color-grey);
     z-index: 100;
+
+    @media (max-width: 550px) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        margin-left: 0;
+    }
 `;
 
 const StyledMenuBox = styled.div`
@@ -32,14 +44,11 @@ const StyledMenuBox = styled.div`
     justify-content: space-around;
     align-content: space-between;
     margin: -1.5rem 0;
-`;
 
-const Rectangle = styled.div`
-    grid-column: 5 / 11;
-    grid-row: 1 / 4;
-    background-color: var(--color-primary);
-    z-index: 20;
-    margin-bottom: 2rem;
+    @media (max-width: 550px) {
+        grid-column: 2 / -2;
+        margin-bottom: 5rem;
+    }
 `;
 
 const WeeklyMenu = () => {
@@ -108,7 +117,10 @@ const WeeklyMenu = () => {
                          />
                 )}
             </StyledMenuBox>
-            <Rectangle />
+            <Rectangle 
+                gridColumn="5 / 11"
+                gridRow="1 / 4"
+                marginBottom="2rem" />
             <MenuModal
                 show={isOpenMenuModal ? "show" : ""}
                 submitHandler={submitRecipeHandler}

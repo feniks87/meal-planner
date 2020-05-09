@@ -7,6 +7,11 @@ const StyledItems = styled.ul`
     display: flex;
     margin: 0 auto;
     padding-left: 0;
+    text-align: center;
+
+    @media (max-width: 550px) {
+        align-items: center;
+    }
 `;
 
 const NavItems = () => (

@@ -18,6 +18,10 @@ const StyledNav = styled.nav`
     border-bottom: 2px solid var(--color-primary);
     padding: 1.5rem;
     background-color: var(--color-primary-light);
+
+    @media (max-width: 550px) {
+        line-height: 1
+    }
 `;
 
 const NavBar = () => (

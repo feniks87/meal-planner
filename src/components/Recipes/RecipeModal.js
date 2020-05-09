@@ -24,10 +24,18 @@ const StyledModalBox = styled.div`
     box-shadow: -2rem 2rem 2rem rgba(black, 0.2);
     box-sizing: border-box;
     left: 20%;
-    top: 30%;
+    top: 20%;
     opacity: 1;
     z-index: 10000;
     overflow: hidden;
+
+    @media (max-width: 550px) {
+        width: 80%;
+        left: 10%;
+        top: 20%;
+        max-height: 70%;
+        overflow: auto;
+    }
 `;
 
 const ModalName = styled.h2`
@@ -54,6 +62,8 @@ const StyledIconButton = styled(CloseButton)`
 
 const ModalContent = styled.div`
     padding: 1rem;
+    max-height: 35rem;
+    overflow: auto;
 `;
 
 const ModalIngs = styled.div`

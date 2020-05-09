@@ -12,17 +12,32 @@ const MenuItemBox = styled.div`
     box-sizing: border-box;
     margin: 1.5rem;
     position: relative;
+
+    @media (max-width: 550px) {
+        width: 40rem;
+        min-height: 16rem;
+    }
 `;
 
 const WeekDay = styled.div`
     text-align: center;
     font-weight: 600;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2.5rem;    
+
+    @media (max-width: 550px) {
+        font-size: 2.5rem;
+        color: var(--color-primary);
+        margin-top: -.5rem;
+    }
 `;
 
 const RecipeItem = styled.div`
     text-align: center;
     cursor: pointer;
+
+    @media (max-width: 550px) {
+        font-size: 2rem;
+    }
 `;
 
 const StyledAddButton = styled(AddButton)`

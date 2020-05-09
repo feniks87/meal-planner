@@ -12,14 +12,13 @@ const Wrapper = styled.div`
     grid-template-rows: 46rem min-content;
     grid-template-columns: repeat(10, 1fr);
     row-gap: 3rem;
-    background-size: cover;
 
+    @media (max-width: 550px) {
+        grid-template-rows: repeat(2, min-content);
+    }
 `;
 
-const Content = styled.div`
-    display: grid;
-    grid-template-rows: repeat(3, min-content);
-    grid-template-columns: 1fr;
+const Content = styled.div`    
     min-height: 65rem;
     grid-row: 3;
     grid-column: 3 / 9;
@@ -27,19 +26,36 @@ const Content = styled.div`
     background-color: #F9F9F9;
     margin-bottom: 5rem;
     padding: 3rem;
+    
+    display: grid;
+    grid-template-rows: repeat(3, min-content);
+    grid-template-columns: 1fr;
     row-gap: 1rem;
+
+    @media (max-width: 1000px) {
+        grid-column: 2 / 10;
+    }
+
+    @media (max-width: 550px) {
+        grid-row: 2;
+        padding-top: 0;
+    }
 `;
 
 const Heading = styled.h2`
     grid-row: 1;
     justify-self: center;
+
+    @media (max-width: 550px) {
+
+    }
 `;
 
 const Recipes = styled.div`
     grid-row: 2;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    grid-gap: 5rem;
 `;
 
 const RecipeLink = styled(NavLink)`

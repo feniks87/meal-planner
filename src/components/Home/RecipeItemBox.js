@@ -2,10 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledItemBox = styled.div`
-    height: 14rem;
-    width: 14rem;
+    width: 100%;
+    min-height: 14rem;
     box-shadow: 0 0 1rem rgba(0,0,0,.2);
-    margin: 3rem;
     padding: 2rem;
     box-sizing: border-box;
     border-bottom: 7px solid var(--color-primary-light);
@@ -18,6 +17,10 @@ const StyledItemBox = styled.div`
     :hover {
         transform: scale(1.05);
     }
+
+    @media (max-width: 435px) {
+        height: 20rem;
+    } 
 `;
 
 const RecipeName = styled.div`
@@ -28,6 +31,13 @@ const RecipeName = styled.div`
     text-align: center;
     margin-top: -3rem;
     margin-right: -3rem;
+
+    @media (max-width: 500px) {
+        padding: 1rem;
+        margin-top: -3.5rem;
+        margin-right: -3.5rem;
+        font-size: 2.2rem;
+    }
 `;
 
 const RecipeItemBox = (props) => {

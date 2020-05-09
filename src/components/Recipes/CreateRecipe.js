@@ -5,12 +5,17 @@ import { createRecipe } from '../../actions/recipeActions';
 import { errorMessage } from '../../actions/alertActions';
 import { storage } from '../../config/config';
 import Button from '../Button';
+import Rectangle from '../UI/Rectangle';
 
 const Wrapper = styled.div`
     display: grid;
     grid-template-rows: min-content 10rem 1fr 7rem;
     grid-template-columns: repeat(10, 1fr);
     margin: 10rem 0;
+
+    @media (max-width: 550px) {
+        margin: 0;
+    }
 `;
 
 const StyledAlertMessage = styled.div`
@@ -33,6 +38,12 @@ const Heading = styled.h2`
     align-self: center;
     color: var(--color-grey);
     z-index: 100;
+
+    @media (max-width: 550px) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        margin-left: 0;
+    }
 `;
 
 const StyledForm = styled.form`
@@ -44,13 +55,10 @@ const StyledForm = styled.form`
     box-sizing: border-box;
     z-index: 100;
     background-color: white;
-`;
 
-const Rectangle = styled.div`
-    grid-column: 4 / 9;
-    grid-row: 2 / -1;
-    background-color: var(--color-primary);
-    z-index: 20;
+    @media (max-width: 550px) {
+        grid-column: 2 / -2;
+    }
 `;
 
 const Input = styled.input`
@@ -103,6 +111,17 @@ const ImageUploadingBox = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 0 3.5rem;
+
+    @media (max-width: 550px) {
+        margin: 0 1.5rem;
+        display: grid;
+        grid-template-columns: min-content 1fr;
+        justify-content: unset;
+        margin: 0;
+        width: 90%;
+        margin: 3rem auto;
+
+    }
 `;
 
 const SelectImageInput = styled.input`
@@ -112,6 +131,10 @@ const SelectImageInput = styled.input`
 const UploadedImage = styled.img`
     width: 7rem;
     height: 7rem;
+
+    @media (max-width: 550px) {
+        grid-column: 1;
+    }
 `;
 
 const SelectImageButton = styled.label`
@@ -131,6 +154,11 @@ const SelectImageButton = styled.label`
         background-color: var(--color-primary);
         font-weight: 600;
     }
+
+    @media (max-width: 550px) {
+        grid-column: 2;
+        justify-self: end;
+    }
 `;
 
 const Progress = styled.progress`
@@ -142,7 +170,6 @@ const Progress = styled.progress`
 
     ::-moz-progress-bar {
         background: var(--color-primary-light);
-
     }
 
     ::-webkit-progress-bar {
@@ -150,6 +177,10 @@ const Progress = styled.progress`
     }
     ::-webkit-progress-value {
         background: var(--color-primary-light);
+    }
+
+    @media (max-width: 550px) {
+        display: none;
     }
 `;
 
@@ -236,7 +267,7 @@ const CreateRecipe = () => {
                     <UploadedImage src={recipe.imageURL || 'https://react.semantic-ui.com/images/wireframe/image.png'} />
                     <Progress value={progress} max="100"/>
                     <SelectImageButton>
-                         <SelectImageInput type="file" onChange={changeImageHandler}/>Upload image
+                         <SelectImageInput type="file" onChange={changeImageHandler}/>Upload Image
                     </SelectImageButton>
                 </ImageUploadingBox>
                 <Button margin="3rem auto" type="submit">Create recipe</Button>

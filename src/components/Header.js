@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import HeaderImage from '../assets/header.jpg';
 import BackgroundImg from '../assets/cover.jpg';
 import NavBar from '../components/Navigation/NavBar';
+import Rectangle from './UI/Rectangle';
 
 const StyledHeader = styled.header`
     grid-column: 1 / -1;
@@ -12,6 +13,17 @@ const StyledHeader = styled.header`
     grid-template-rows: 4rem repeat(7, 1fr);
     grid-template-columns: repeat(15, 1fr);
     border-bottom: 1px solid var(--color-primary-light);
+
+    @media (max-width: 950px) {
+        grid-template-rows: 4rem repeat(6, 1fr);
+    }
+
+    @media (max-width: 550px) {
+        grid-template-rows: 5rem repeat(2, 1fr) 2rem;
+        height: 30rem;
+        background-image: url(${HeaderImage});
+        background-size: cover;
+    }
 `;
 
 const BackgroundImage = styled.div`
@@ -30,6 +42,16 @@ const QuoteBox = styled.div`
     font-size: 2.5rem;
     z-index: 100;
 
+    @media (max-width: 950px) {
+        grid-row: 5 / 6;
+        grid-column: 2 / 10;
+    }
+
+    @media (max-width: 550px) {
+        grid-row: 3 / 4;
+        grid-column: 2 / -2;
+        font-size: 2.2rem;
+    }
 `;
 
 const QuoteText = styled.div`
@@ -47,6 +69,17 @@ const Text = styled.div`
     z-index: 100;
     display: grid;
 
+    @media (max-width: 950px) {
+        grid-row: 3 / 4;
+        grid-column: 2 / 10;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    @media (max-width: 550px) {
+        grid-row: 2 / 3;
+        grid-column: 2 / -2;
+    }
 `;
 
 const TextItem = styled.div`
@@ -61,14 +94,15 @@ const Image = styled.div`
     background-size: cover;
     z-index: 100;
     border: 4px solid var(--color-primary);
-`;
 
-const Rectangle = styled.div`
-    grid-column: 12 / 16;
-    grid-row: 2 / -1;
+    @media (max-width: 950px) {
+        grid-row: 3 / 7;
+        grid-column: 11 / -1;
+    }
 
-    background-color: var(--color-primary);
-    z-index: 20;
+    @media (max-width: 550px) {
+        display: none;
+    }
 `;
 
 const Header = () => (
@@ -85,7 +119,8 @@ const Header = () => (
             <QuoteAuthor>Ted Allen</QuoteAuthor>
         </QuoteBox>
         <Image />
-        <Rectangle />
+        <Rectangle 
+            gridColumn="12 / 16" />
     </StyledHeader>
 )
 

@@ -8,7 +8,7 @@ import WeeklyMenu from './components/Menu/WeeklyMenu';
 import { clearMessage } from './actions/alertActions';
 import { history } from './helpers/history';
 import HomePage from './components/Home/HomePage';
-import ScrollToTop from './helpers/ScrollToTop';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
 

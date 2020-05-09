@@ -5,12 +5,17 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import {fetchRecipes} from '../../actions/recipeActions';
 import RecipeModal from './RecipeModal';
+import Rectangle from '../UI/Rectangle';
 
 const Wrapper = styled.div`
     display: grid;
     grid-template-rows: 10rem 1fr 7rem;
     grid-template-columns: repeat(10, 1fr);
     margin: 10rem 0;
+
+    @media (max-width: 550px) {
+        margin: 0;
+    }
 `;
 
 const Heading = styled.h2`
@@ -20,6 +25,12 @@ const Heading = styled.h2`
     color: var(--color-grey);
     margin-left: 8rem;
     z-index: 100;
+
+    @media (max-width: 550px) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        margin-left: 0;
+    }
 `;
 
 const StyledList = styled.div`
@@ -31,9 +42,18 @@ const StyledList = styled.div`
     box-sizing: border-box;
     z-index: 100;
     background-color: white;
+
+    @media (max-width: 550px) {
+        grid-column: 1 / -1;
+        box-shadow: none;
+        border: none;
+        padding: 0 3rem;
+        background-color: transparent;
+    }
 `;
 
 const SearchInputBox = styled.input`
+    box-sizing: border-box;
     outline: none;
     padding: .6rem;
     margin-top: .8rem;
@@ -52,13 +72,10 @@ const SearchInputBox = styled.input`
         border: 1px solid var(--color-primary-light);
         box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 3px rgba(247, 220, 89, .6);
     }
-`;
 
-const Rectangle = styled.div`
-    grid-column: 4 / 9;
-    grid-row: 1 / -1;
-    background-color: var(--color-primary);
-    z-index: 20;
+    @media (max-width: 550px) {
+        width: 100%;
+    }
 `;
 
 const RecipeList = () => {
@@ -104,7 +121,7 @@ const RecipeList = () => {
                         recipe={selectedRecipe}
                         closeHandler={closeModalHandler}/>
                 </StyledList>
-                <Rectangle/>
+                <Rectangle gridRow="1 / -1"/>
             </Wrapper>
         </div>
     );
