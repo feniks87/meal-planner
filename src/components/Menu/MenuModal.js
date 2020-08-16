@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../Button';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchRecipes } from '../../actions/recipeActions';
@@ -54,7 +53,6 @@ const HeadingBox = styled.div`
         flex-direction: column;
         width: 80%;
     }
-
 `;
 
 const ModalName = styled.h2`
@@ -102,18 +100,12 @@ const StyledIconButton = styled(CloseButton)`
 const ModalContent = styled.div`
     margin-top: 6rem;
     padding: 1rem;
-    max-height: 35rem;
     overflow: auto;
-
+    max-height: 35rem;
     @media (max-width: 550px) {
         margin-top: 11rem;
+        max-height: 40rem;
     }
-`;
-
-const ModalActions = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    box-shadow: 0 0 1rem rgba(0,0,0,.1);
 `;
 
 const ModalMenu = (props) => {
@@ -136,8 +128,11 @@ const ModalMenu = (props) => {
 
 
     const selectHandler = recipe => {
-        setSelectedRecipes(prevRecipes =>
-            !prevRecipes.some(item => item.name === recipe.name) ? [...prevRecipes, recipe] : prevRecipes.filter(item => item.name !== recipe.name));
+        const newRecipes = !selectedRecipes.some(item => item.name === recipe.name)
+            ? [...selectedRecipes, recipe]
+            : selectedRecipes.filter(item => item.name !== recipe.name);
+        setSelectedRecipes(newRecipes);
+        props.submitHandler(newRecipes);
         };
 
     const filteredRecipes = (recipeList) => recipeList.filter(recipe => !searchName || searchName.length === 0 || recipe.name.toLowerCase().includes(searchName.toLowerCase()));
@@ -166,10 +161,6 @@ const ModalMenu = (props) => {
                             onClickHandler={selectHandler}/>
                         )}
                 </ModalContent>
-                <ModalActions>
-                    <Button onClick={() => props.submitHandler(selectedRecipes)}>Save</Button>
-                    <Button onClick={props.closeHandler}>Close</Button>
-                </ModalActions>
             </StyledModalBox>
         </StyledModal>
     )

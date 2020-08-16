@@ -95,7 +95,6 @@ const WeeklyMenu = () => {
     };
 
     const submitRecipeHandler = (recipes) => {
-        setOpenMenuModal(!isOpenMenuModal);
         const newMenu = menu.map(item =>
             item.day === weekDay ? {...item, recipes: recipes} : item
             );

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../Button';
 import { ReactComponent as CloseButton } from '../../assets/svg/close.svg'
 
 const StyledModal = styled.div`
@@ -24,7 +23,7 @@ const StyledModalBox = styled.div`
     box-shadow: -2rem 2rem 2rem rgba(black, 0.2);
     box-sizing: border-box;
     left: 20%;
-    top: 20%;
+    top: 30%;
     opacity: 1;
     z-index: 10000;
     overflow: hidden;
@@ -33,13 +32,13 @@ const StyledModalBox = styled.div`
         width: 80%;
         left: 10%;
         top: 20%;
-        max-height: 70%;
-        overflow: auto;
+        max-height: 80%;
     }
 `;
 
 const ModalName = styled.h2`
     padding: 1rem;
+    padding-right: 3rem;
     margin: 0;
 `;
 
@@ -64,6 +63,9 @@ const ModalContent = styled.div`
     padding: 1rem;
     max-height: 35rem;
     overflow: auto;
+    @media (max-width: 550px) {
+        max-height: 40rem;
+    }
 `;
 
 const ModalIngs = styled.div`
@@ -72,11 +74,6 @@ const ModalIngs = styled.div`
 
 const ModalDirections = styled.div`
     padding: 1rem;
-`;
-
-const ModalActions = styled.div`
-    display: flex;
-    box-shadow: 0 0 1rem rgba(0,0,0,.1);
 `;
 
 const Modal = (props) => {
@@ -96,9 +93,6 @@ const Modal = (props) => {
                         {props.recipe.directions}
                     </ModalDirections>
                 </ModalContent>
-                <ModalActions>
-                    <Button margin="3rem auto" onClick={props.closeHandler}>Close</Button>
-                </ModalActions>
             </StyledModalBox>
         </StyledModal>
     )
