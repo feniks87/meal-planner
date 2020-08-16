@@ -13,6 +13,7 @@ const StyledRecipeBox = styled.div`
     cursor: pointer;
     transition: all .2s;
     border: ${props => props.selected || null};
+    background: var(--color-tertiary);
 
     :hover {
         box-shadow: 0 0 2rem rgba(0,0,0,.3);
