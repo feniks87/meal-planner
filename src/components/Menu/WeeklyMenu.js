@@ -44,6 +44,7 @@ const StyledMenuBox = styled.div`
     justify-content: space-around;
     align-content: space-between;
     margin: -1.5rem 0;
+    min-height: 70rem;
 
     @media (max-width: 550px) {
         grid-column: 2 / -2;
