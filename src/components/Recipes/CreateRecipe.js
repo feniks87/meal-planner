@@ -267,7 +267,7 @@ const CreateRecipe = () => {
                     <UploadedImage src={recipe.imageURL || 'https://react.semantic-ui.com/images/wireframe/image.png'} />
                     <Progress value={progress} max="100"/>
                     <SelectImageButton>
-                         <SelectImageInput type="file" onChange={changeImageHandler}/>Upload Image
+                         <SelectImageInput type="file" onChange={changeImageHandler}/>Select Image
                     </SelectImageButton>
                 </ImageUploadingBox>
                 <Button margin="3rem auto" type="submit">Create recipe</Button>

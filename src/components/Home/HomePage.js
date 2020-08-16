@@ -125,6 +125,7 @@ const HomePage = () => {
                 <Recipes>
                     {randomRecipes.map(recipe =>
                         <RecipeItemBox
+                            key={recipe.id}
                             recipe={recipe}
                             recipeName={recipe.name}
                             image={recipe.imageURL || 'https://react.semantic-ui.com/images/wireframe/image.png'}

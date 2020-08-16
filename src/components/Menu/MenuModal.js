@@ -160,13 +160,14 @@ const ModalMenu = (props) => {
                 <ModalContent>
                     {sortedRecipes.map(item =>
                         <RecipeItem
+                            key={item.id}
                             selected={selectedRecipes.some(recipe => item.name === recipe.name) ? "2px solid var(--color-primary-light)" : null }
                             recipe={item}
                             onClickHandler={selectHandler}/>
                         )}
                 </ModalContent>
                 <ModalActions>
-                    <Button onClick={() => props.submitHandler(selectedRecipes)}>select</Button>
+                    <Button onClick={() => props.submitHandler(selectedRecipes)}>Save</Button>
                     <Button onClick={props.closeHandler}>Close</Button>
                 </ModalActions>
             </StyledModalBox>

@@ -110,6 +110,7 @@ const WeeklyMenu = () => {
             <StyledMenuBox>
                 {menu.map(menuItem =>
                     <MenuItem
+                        key={menuItem.day}
                         weekDay={menuItem.day}
                         recipeItems={menuItem.recipes}
                         buttonClick={openMenuModalHandler}

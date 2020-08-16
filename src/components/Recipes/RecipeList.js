@@ -112,6 +112,7 @@ const RecipeList = () => {
                     <SearchInputBox type="text" name="name" value={searchName} onChange={inputHanler} placeholder="Search..."/>
                     {filteredRecepies(recipes).map(item =>
                         <RecipeItem
+                            key={item.id}
                             onClickHandler={openModalHandler}
                             recipe={item}
                         />
