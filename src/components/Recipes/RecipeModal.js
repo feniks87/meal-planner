@@ -14,6 +14,12 @@ const StyledModal = styled.div`
     display: ${props => props.show ? "block" : "none"};
 `;
 
+const Overlay = styled.div`
+    z-index: 0;
+    height: 100vh;
+    width: 100%;
+`;
+
 const StyledModalBox = styled.div`
     position: absolute;
     width: 60%;
@@ -78,13 +84,13 @@ const ModalDirections = styled.div`
 
 const Modal = (props) => {
     return (
-        <StyledModal show={props.show}>
+        <StyledModal show={props.show} >
+            <Overlay onClick={props.closeHandler} />
             <StyledModalBox >
                 <HeadingBox>
                     <ModalName>{props.recipe.name}</ModalName>
                     <StyledIconButton onClick={props.closeHandler}/>
                 </HeadingBox>
-
                 <ModalContent>
                     <ModalIngs>
                         {props.recipe.ings}

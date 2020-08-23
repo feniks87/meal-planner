@@ -42,6 +42,7 @@ const StyledList = styled.div`
     box-sizing: border-box;
     z-index: 100;
     background-color: white;
+    min-height: 55vh;
 
     @media (max-width: 550px) {
         grid-column: 1 / -1;

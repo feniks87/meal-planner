@@ -7,7 +7,6 @@ const StyledItemBox = styled.div`
     box-shadow: 0 0 1rem rgba(0,0,0,.2);
     padding: 2rem;
     box-sizing: border-box;
-    border-bottom: 7px solid var(--color-primary-light);
     background-image: url(${props => props.image});
     background-size: cover;
     border-radius: 2px;

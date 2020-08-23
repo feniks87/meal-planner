@@ -18,9 +18,16 @@ const StyledModal = styled.div`
     display: ${props => props.show ? "block" : "none"};
 `;
 
+const Overlay = styled.div`
+    z-index: 0;
+    height: 100vh;
+    width: 100%;
+`;
+
 const StyledModalBox = styled.div`
     position: absolute;
     width: 60vw;
+    min-height: 73vh;
     max-height: 73vh;
     position: fixed;
     background-color: white;
@@ -119,7 +126,7 @@ const ModalMenu = (props) => {
     }, [dispatch]);
 
     useEffect(() => {
-        setSelectedRecipes(props.currentRecipes === undefined ? [] : props.currentRecipes)
+        setSelectedRecipes(props.currentRecipes === undefined ? [] : props.currentRecipes);
     }, [props.currentRecipes]);
 
     const inputHanler = event => {
@@ -146,11 +153,20 @@ const ModalMenu = (props) => {
 
     return (
         <StyledModal show={props.show}>
+            <Overlay onClick={() => {
+                        props.closeHandler();
+                        setSearchName("");
+                        }
+                    }/>
             <StyledModalBox>
                 <HeadingBox>
                     <ModalName>Select a recipe</ModalName>
                     <SearchInputBox type="text" name="name" value={searchName} onChange={inputHanler} placeholder="Search..."/>
-                    <StyledIconButton onClick={props.closeHandler}/>
+                    <StyledIconButton onClick={() => {
+                        props.closeHandler();
+                        setSearchName("");
+                        }
+                    }/>
                 </HeadingBox>
                 <ModalContent>
                     {sortedRecipes.map(item =>
